@@ -1,10 +1,7 @@
 package com.aks.Entity;
 
-import jdk.vm.ci.meta.Local;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.sql.Date;
 
 @Entity
 @Table(name = "SUBSCRIPTION")
@@ -18,10 +15,10 @@ public class Subscription {
     private User user;
 
     @Column(name = "START_DATE", nullable = false)
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(name = "END_DATE", nullable = false)
-    private Date endDate;
+    private LocalDate endDate;
 
     @Enumerated(EnumType.ORDINAL)
     private PLAN plan;
@@ -30,23 +27,29 @@ public class Subscription {
     }
 
     /**
+     * @param startDate
+     * @param endDate
+     * @param plan
+     */
+    public Subscription(LocalDate startDate, LocalDate endDate, PLAN plan) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.plan = plan;
+    }
+
+    /**
      * @param user
      * @param startDate
      * @param endDate
      * @param plan
      */
-    public Subscription(User user, Date startDate, Date endDate, PLAN plan) {
+    public Subscription(User user, LocalDate startDate, LocalDate endDate, PLAN plan) {
         this.user = user;
         this.startDate = startDate;
         this.endDate = endDate;
         this.plan = plan;
     }
 
-    public Subscription(Date startDate, Date endDate, PLAN plan) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.plan = plan;
-    }
 
     public int getSubs_id() {
         return subs_id;
@@ -60,19 +63,19 @@ public class Subscription {
         this.user = user;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

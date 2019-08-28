@@ -5,12 +5,8 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-enum STATUS{
-    DELIVERED, PENDING, RETURNED, CANCELLED
-}
-
 @Entity
-@Table(name = "ORDER")
+@Table(name = "PURCHASE")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +18,8 @@ public class Order {
     @JoinColumn(name = "USER_ID", nullable = false)
     private User user;
 
-    @OneToOne(mappedBy = "order", cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Book book;
-
-    @ManyToMany(mappedBy = "orders")
-    private List<Cart> carts=new ArrayList<Cart>();
 
     @Enumerated(EnumType.STRING)
     private STATUS status;
@@ -45,15 +38,6 @@ public class Order {
         this.book = book;
         this.status = status;
     }
-
-    public List<Cart> getCarts() {
-        return carts;
-    }
-
-    public void setCarts(List<Cart> carts) {
-        this.carts = carts;
-    }
-
 
     public int getOrder_id() {
         return order_id;

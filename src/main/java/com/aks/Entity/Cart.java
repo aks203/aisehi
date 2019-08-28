@@ -17,29 +17,34 @@ public class Cart {
     @JoinTable(
             name = "Cart_Items",
             joinColumns = { @JoinColumn(name = "CART_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "ORDER_ID") }
+            inverseJoinColumns = { @JoinColumn(name = "BOOK_ID") }
     )
-    private List<Order> orders=new ArrayList<Order>();
+    private List<Book> books=new ArrayList<Book>();
+
+
+    @OneToOne(mappedBy = "cart")
+    private User user;
 
     public Cart() {
     }
 
     /**
-     * @param orders
+     *
+     * @return
      */
-    public Cart(List<Order> orders) {
-        this.orders = orders;
-    }
-
     public int getCartId() {
         return cartId;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

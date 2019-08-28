@@ -12,6 +12,7 @@
 </head>
 <body>
     ${user.name}
+    ${user.email}
 
 </body>
 </html>

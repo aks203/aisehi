@@ -1,6 +1,8 @@
 package com.aks.Entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "BOOK")
@@ -26,6 +28,8 @@ public class Book {
     @JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")
     private Order order;
 
+    @ManyToMany(mappedBy = "books")
+    private List<Cart> carts=new ArrayList<Cart>();
     /**
      *
      * @param title
@@ -51,8 +55,18 @@ public class Book {
      * Getters and setters
      */
 
+
+
     public Order getOrder() {
         return order;
+    }
+
+    public List<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<Cart> carts) {
+        this.carts = carts;
     }
 
     public void setOrder(Order order) {

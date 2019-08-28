@@ -3,12 +3,13 @@ package com.aks.Entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "USER")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID", nullable = false, unique = true)
@@ -17,7 +18,7 @@ public class User {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Email(message = "Please enter correct email-id.")
+//    @Email(message = "Please enter correct email-id.")
     @Column(name = "EMAIL",unique = true, nullable = false)
     private String email;
 
@@ -30,12 +31,17 @@ public class User {
     @Column(name = "LANGUAGE")
     private String language;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
     private List<Order> orders=new ArrayList<Order>();
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "SUBS_ID", referencedColumnName = "SUBS_ID")
     private Subscription subscription;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")
+    private Cart cart;
+
 
     /**
      * Default Constructor
@@ -59,6 +65,22 @@ public class User {
         this.phone = phone;
         this.language = language;
         this.subscription = subscription;
+    }
+
+    /**
+     *
+     * @param name
+     * @param email
+     * @param password
+     * @param phone
+     * @param language
+     */
+    public User(String name, @Email(message = "Please enter correct email-id.") String email, String password, String phone, String language) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.language = language;
     }
 
     public int getId() {
@@ -121,17 +143,4 @@ public class User {
         this.subscription = subscription;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", language='" + language + '\'' +
-                ", orders=" + orders +
-                ", subscription=" + subscription +
-                '}';
-    }
 }

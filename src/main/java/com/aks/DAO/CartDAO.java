@@ -1,4 +1,4 @@
 package com.aks.DAO;
 
-public class CartDAO {
+public interface CartDAO {
 }

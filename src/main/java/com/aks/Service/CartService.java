@@ -1,4 +1,4 @@
 package com.aks.Service;
 
-public class CartService {
+public interface CartService {
 }

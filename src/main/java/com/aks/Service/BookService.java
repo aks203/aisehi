@@ -1,4 +1,5 @@
 package com.aks.Service;
 
-public class BookService {
+public interface BookService {
+
 }

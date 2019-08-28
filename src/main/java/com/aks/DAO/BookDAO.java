@@ -1,4 +1,4 @@
 package com.aks.DAO;
 
-public class BookDAO {
+public interface BookDAO {
 }

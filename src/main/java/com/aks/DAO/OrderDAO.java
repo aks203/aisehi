@@ -1,4 +1,5 @@
 package com.aks.DAO;
 
-public class OrderDAO {
+public interface OrderDAO {
+
 }
