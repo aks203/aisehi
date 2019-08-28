@@ -1,5 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,15 +19,12 @@
     <input type="button" value="Go" id="register"></input>
 </form>
 
-
-
 <script type="text/template" id="userTemplate">
-
-    <td><span class="name"><@ name @></span> </td>
-    <td><span class="email"><@ email @></span> </td>
-    <td><span class="password"><@ password @></span> </td>
-    <td><span class="password"><@ phone @></span> </td>
-    <td><span class="password"><@ language @></span> </td>
+    <td><span class="name"><@= name @></span> </td>
+    <td><span class="email"><@= email @></span> </td>
+    <td><span class="password"><@= password @></span> </td>
+    <td><span class="password"><@= phone @></span> </td>
+    <td><span class="password"><@= language @></span> </td>
 </script>
 </body>
 </html>

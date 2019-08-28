@@ -18,6 +18,12 @@ public class RegistrationController {
     @Autowired
     UserService userService;
 
+    @RequestMapping("/signup")
+    public String signup(){
+        return "index";
+    }
+
+
     @GetMapping(value = "/register")
     public ModelAndView showRegistrationForm(HttpServletRequest request){
         User user=new User();
