@@ -1,6 +1,8 @@
 package com.aks.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
@@ -32,6 +34,9 @@ public class User implements Serializable {
     private String language;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
+    //Lazy loading problem while rendering JSON in Backbone
+    //Thus, used @JsonIgnore.
+    @JsonIgnore
     private List<Order> orders=new ArrayList<Order>();
 
     @OneToOne(cascade = {CascadeType.ALL})

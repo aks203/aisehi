@@ -15,5 +15,13 @@ public interface UserDAO{
      */
     User getUser(int id);
 
+    /**
+     *
+     * @param email
+     * @param password
+     * @return
+     */
+    User getUser(String email, String password);
+
     boolean deleteUser(int user_id);
 }

@@ -36,6 +36,7 @@ public class UserDAOImpl implements UserDAO {
             return false;
     }
 
+    @Override
     public User getUser(int id){
         //Get the current hibernate session
         Session currentSession=sessionFactory.getCurrentSession();
@@ -43,5 +44,14 @@ public class UserDAOImpl implements UserDAO {
         q.setParameter("id", id);
         User user=(User)q.uniqueResult();
         return user;
+    }
+
+    @Override
+    public User getUser(String email, String password){
+        Session currentSession=sessionFactory.getCurrentSession();
+        Query q=currentSession.createQuery("from User where email= :email and password= :password");
+        q.setParameter("email", email);
+        q.setParameter("password", password);
+        return (User)q.uniqueResult();
     }
 }

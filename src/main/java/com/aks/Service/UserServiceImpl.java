@@ -25,6 +25,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUser(String email, String password){
+        return userDAO.getUser(email, password);
+
+    }
+
+    @Override
     public void updateUser(User updatedUser) {
         User user=userDAO.getUser(updatedUser.getId());
         user.setName(updatedUser.getName());

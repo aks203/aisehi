@@ -15,17 +15,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/user/{id}")
-    public String getUser(@PathVariable("id") long id, Model theModel){
-        User user=userService.getUser((int)id);
-        theModel.addAttribute("user", user);
-        return "show-user";
-    }
+//    @RequestMapping("/user/{id}")
+//    public String getUser(@PathVariable("id") long id, Model theModel){
+//        User user=userService.getUser((int)id);
+//        theModel.addAttribute("user", user);
+//        return "show-user";
+//    }
 
-    @GetMapping("/showFormForUpdate")
-    public String showFormForUpdate(@RequestParam("id") int id, Model theModel){
-        User user=userService.getUser(id);
-        theModel.addAttribute("user", user);
-        return "user-form";
-    }
+//    @GetMapping("/showFormForUpdate")
+//    public String showFormForUpdate(@RequestParam("id") int id, Model theModel){
+//        User user=userService.getUser(id);
+//        theModel.addAttribute("user", user);
+//        return "user-form";
+//    }
 }
