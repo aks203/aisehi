@@ -10,6 +10,7 @@ app.DashboardView=Backbone.View.extend({
         console.log("Dashboard initialized...");
         console.log("Header rendered...")
         this.$el.html(this.templateHeader());
+        componentHandler.upgradeDom();
         this.render();
     },
 

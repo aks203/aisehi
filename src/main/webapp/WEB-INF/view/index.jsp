@@ -11,10 +11,11 @@
 <spring:url value="/resources/model/AuthModel.js" var="AuthModel" />
 <spring:url value="/resources/view/LoginView.js" var="LoginView" />
 
+
+<script src="resources/mdlComponenthandler.js"></script>
 <script src="${RegView}"></script>
 <script src="${UserModel}"></script>
 <script src="${AuthModel}"></script>
 <script src="${LoginView}"></script>
 <script src="${DashboardView}"></script>
 <script src="${DashboardModel}"></script>
-

@@ -24,14 +24,15 @@ app.LoginView=Backbone.View.extend({
             type: "POST",
             contentType: "application/json"
         }, {success:function (model, response) {
-                debugger;
                 console.log("Login success");
                 if(response.status=="Error"){
                     $("#loginMsg").html(response.msg);
                 }
                 else {
-                    app.user_id=response.user.id;
+                    sessionStorage.setItem("user_id", response.user.id);
+                    // app.user_id=response.user.id;
                     showDashboard();
+                    console.log(sessionStorage.getItem("user_id"));
                 }
             },
             error: function (model, response) {

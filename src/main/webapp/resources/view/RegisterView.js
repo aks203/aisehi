@@ -46,5 +46,13 @@ app.signupView = Backbone.View.extend({
 });
 
 $(document).ready(function () {
-    new app.signupView({model: new app.User});
+    debugger;
+    if(sessionStorage.getItem("user_id")==null) {
+        console.log(sessionStorage.getItem("user_id"));
+        new app.signupView({model: new app.User});
+    }
+    else {
+        console.log(sessionStorage.getItem("user_id"));
+        showDashboard();
+    }
 })
