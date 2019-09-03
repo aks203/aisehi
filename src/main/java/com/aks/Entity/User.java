@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,22 +15,23 @@ import java.util.List;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_ID", nullable = false, unique = true)
+    @Column(name = "USER_ID", unique = true)
     private int id;
 
+    @NotNull
     @Column(name = "NAME", nullable = false)
     private String name;
 
 //    @Email(message = "Please enter correct email-id.")
+    @NotNull
     @Column(name = "EMAIL",unique = true, nullable = false)
     private String email;
 
+    @NotNull
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @Column(name = "PHONE")
-    private String phone;
-
+    @NotNull
     @Column(name = "LANGUAGE")
     private String language;
 
@@ -47,6 +49,9 @@ public class User implements Serializable {
     @JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")
     private Cart cart;
 
+    @Transient
+    private String userMsg;
+
 
     /**
      * Default Constructor
@@ -59,15 +64,13 @@ public class User implements Serializable {
      * @param name
      * @param email
      * @param password
-     * @param phone
      * @param language
      * @param subscription
      */
-    public User(String name, String email, String password, String phone, String language, Subscription subscription) {
+    public User(String name, String email, String password, String language, Subscription subscription) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.phone = phone;
         this.language = language;
         this.subscription = subscription;
     }
@@ -77,15 +80,21 @@ public class User implements Serializable {
      * @param name
      * @param email
      * @param password
-     * @param phone
      * @param language
      */
-    public User(String name, @Email(message = "Please enter correct email-id.") String email, String password, String phone, String language) {
+    public User(String name, @Email(message = "Please enter correct email-id.") String email, String password, String language) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.phone = phone;
         this.language = language;
+    }
+
+    public String getUserMsg() {
+        return userMsg;
+    }
+
+    public void setUserMsg(String userMsg) {
+        this.userMsg = userMsg;
     }
 
     public int getId() {
@@ -114,14 +123,6 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getLanguage() {

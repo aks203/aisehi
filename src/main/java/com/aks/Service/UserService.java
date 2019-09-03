@@ -7,8 +7,9 @@ import com.aks.Entity.User;
 import java.util.List;
 
 public interface UserService {
+    boolean checkEmail(String email);
     //Create a subscription object using subsType int var. Then create user obj.
-    User createUser(String name, String email, String password, String phone, String language);
+    User createUser(String name, String email, String password, String language);
 
     /**
      *

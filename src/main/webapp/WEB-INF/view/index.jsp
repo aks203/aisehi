@@ -5,7 +5,9 @@
 <%@include file="./index.html" %>
 
 <spring:url value="/resources/view/RegisterView.js" var="RegView" />
+<spring:url value="/resources/view/DashboardView.js" var="DashboardView" />
 <spring:url value="/resources/model/UserModel.js" var="UserModel" />
+<spring:url value="/resources/model/DashboardModel.js" var="DashboardModel" />
 <spring:url value="/resources/model/AuthModel.js" var="AuthModel" />
 <spring:url value="/resources/view/LoginView.js" var="LoginView" />
 
@@ -13,4 +15,6 @@
 <script src="${UserModel}"></script>
 <script src="${AuthModel}"></script>
 <script src="${LoginView}"></script>
+<script src="${DashboardView}"></script>
+<script src="${DashboardModel}"></script>
 

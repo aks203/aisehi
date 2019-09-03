@@ -26,6 +26,13 @@ app.LoginView=Backbone.View.extend({
         }, {success:function (model, response) {
                 debugger;
                 console.log("Login success");
+                if(response.status=="Error"){
+                    $("#loginMsg").html(response.msg);
+                }
+                else {
+                    app.user_id=response.user.id;
+                    showDashboard();
+                }
             },
             error: function (model, response) {
                 console.log("Error: " + response + " .. ");

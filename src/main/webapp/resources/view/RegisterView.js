@@ -8,8 +8,6 @@ app.signupView = Backbone.View.extend({
     events: {
         'click #register': 'onRegFormSubmit',
         'click #showRegister': 'showRegisterForm'
-
-
     },
 
     initialize: function () {
@@ -20,7 +18,6 @@ app.signupView = Backbone.View.extend({
     showRegisterForm: function(e){
       this.render();
     },
-
 
     onRegFormSubmit: function (e) {
         // e.preventDefault();
@@ -33,11 +30,12 @@ app.signupView = Backbone.View.extend({
             type: "POST",
             contentType: "application/json"
         },{success:function (model, response) {
-                console.log("Succccessss");
-                console.log(o.model.toJSON());
+                $("#regMsg").html(response.msg);
+                console.log(response.msg);
             },
             error: function (model, response) {
                 console.log('error! ' + response);
+                $("#regMsg").html("Error creating user. Please try again..")
             }, wait: true});
     },
 

@@ -7,8 +7,11 @@ import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDate;
 
 //This @Repository handles checked exceptions and Spring will
@@ -22,7 +25,7 @@ public class UserDAOImpl implements UserDAO {
 
     public void createUser(User user){
         Session currentSession=sessionFactory.getCurrentSession();
-        currentSession.save(user);
+            currentSession.save(user);
     };
 
     public boolean deleteUser(int user_id){

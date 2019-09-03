@@ -2,43 +2,72 @@ package com.aks.Controller;
 
 import com.aks.Entity.User;
 import com.aks.Service.UserService;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class RegistrationController {
     @Autowired
     UserService userService;
 
-//    /{email}/{password}
-
-    @PostMapping(value = "/login")
-    public @ResponseBody User login(
-            @RequestBody User user
-//            @RequestParam(value = "email")String email,
-//            @RequestParam(value = "password") String password
-    ){
-        return userService.getUser(user.getEmail(), user.getPassword());
+    @RequestMapping(value = "/login")
+    public @ResponseBody Map<String, Object> login(
+            @RequestBody User user){
+        Map<String, Object> userDetails = new HashMap<String, Object>();
+        try {
+            User newUser=userService.getUser(user.getEmail(), user.getPassword());
+            if(newUser==null){
+                userDetails.put("status", "Error");
+                userDetails.put("msg", "Login unsuccessful! Please check details.");
+                return userDetails;
+            }
+            userDetails.put("user", newUser);
+            userDetails.put("status", "Success");
+            userDetails.put("msg", "Login successful. Enjoy.");
+            return userDetails;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            userDetails.put("status", "Error");
+            userDetails.put("msg", "\"Error creating user. Please fill all the details correctly..\"");
+            return userDetails;
+        }
     }
 
-    @PostMapping(value = "/register", consumes = "application/json")
-     public @ResponseBody User registerNewUser(
+    @RequestMapping(value = "/register", consumes = "application/json")
+     public @ResponseBody Map<String, Object> registerNewUser(
             HttpServletRequest request,
             @RequestBody User user,
             HttpServletResponse response){
-        User newUser=new User();
-        try{
-            newUser=userService.createUser(user.getName(), user.getEmail(), user.getPassword(), user.getPhone(), user.getLanguage());
-                return newUser;
+        Map<String, Object> userDetails = new HashMap<String, Object>();
+        try {
+            if (user.getName()== "" || user.getEmail() == "" || user.getPassword() == "" || user.getPassword() == "" || userService.checkEmail(user.getEmail())==false) {
+                userDetails.put("status", "Error");
+                userDetails.put("msg", "\"Error creating user. Please fill all the details correctly..\"");
+                return userDetails;
+            }
+            userDetails.put("user", userService.createUser(user.getName(), user.getEmail(), user.getPassword(), user.getLanguage()));
+            userDetails.put("status", "Success");
+            userDetails.put("msg", "User successfully created. Now, you can login.");
+            return userDetails;
         }
-        catch(Exception ex){
-            ex.printStackTrace();
+        catch (ConstraintViolationException duplEx) {
+            duplEx.printStackTrace();
+            userDetails.put("status", "Error");
+            userDetails.put("msg", "Duplicate entry for this user. Please correct details.");
+            return userDetails;
         }
-        //Just return blank to remove error for return statement
-        return newUser;
+        catch (Exception ex) {
+            userDetails.put("status", "Error");
+            userDetails.put("msg", "Error creating user. Please correct details.");
+            return userDetails;
+        }
     }
 }
