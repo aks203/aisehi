@@ -2,31 +2,33 @@ body {
     color: #fff;
     background: #63738a;
 }
-/*css for book container*/
-.bookContainer .bookItem {
+
+.bookItem span{
+    opacity: 0.5;
+}
+
+.bookItem {
     outline: 1px solid #aaa;
     width: 350px;
-    height: 130px;
+    height: 150px;
     background-color: #fff;
     float: left;
     margin: 20px;
 }
 
-.bookContainer .bookItem img {
+.bookItem img {
     float: left;
     margin: 10px;
+
 }
 
-.bookContainer .bookItem ul {
+ .bookItem ul {
     list-style-type: none;
     margin-bottom: 0;
-}
-
-li{
     color: black;
 }
 
-.bookContainer .bookItem button {
+.bookItem button {
     float: right;
     margin: 10px;
 }
