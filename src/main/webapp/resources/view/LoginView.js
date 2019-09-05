@@ -47,7 +47,3 @@ app.LoginView=Backbone.View.extend({
         return this;
     }
 });
-
-function showLoginForm () {
-    new app.LoginView({model: new app.Auth()})
-};

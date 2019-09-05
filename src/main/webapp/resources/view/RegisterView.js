@@ -7,13 +7,18 @@ app.signupView = Backbone.View.extend({
 
     events: {
         'click #register': 'onRegFormSubmit',
-        'click #showRegister': 'showRegisterForm'
+        'click #showRegister': 'showRegisterForm',
+        'click #showLogin': 'showLoginForm'
     },
 
     initialize: function () {
         console.log(this.model);
         this.render();
     },
+
+    showLoginForm:function(e) {
+    new app.LoginView({model: new app.Auth()})
+},
 
     showRegisterForm: function(e){
       this.render();

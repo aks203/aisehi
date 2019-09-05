@@ -4,7 +4,25 @@ app.LibraryView = Backbone.View.extend({
     el: '#content',
     model: app.BookCollection,
 
+    events:{
+        'click #addBookBtn':'addBook'
+    },
+
+    addBook: function( e ) {
+        e.preventDefault();
+        var formData = {};
+
+        $( '#addBookForm div' ).children( 'input' ).each( function( i, el ) {
+            if( $( el ).val() !== '' )
+            {
+                formData[ el.id ] = $( el ).val();
+            }
+        });
+        this.collection.add( new app.BookModel( formData ) );
+    },
+
     initialize: function( initialBooks ) {
+        // this.listenTo( this.collection, 'add', showDashboard(JSON.parse(sessionStorage.getItem("response"))));
         this.collection = new app.BookCollection(initialBooks);
         this.render();
     },

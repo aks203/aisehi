@@ -325,6 +325,7 @@
     </html>
 </script>
 
+
 <script id="bookTemplate" type="text/template">
     <div class="bookItem">
     <img src="<@= coverImage @>"/>
@@ -334,8 +335,23 @@
         <li><span class="bookHeaders">Category: </span><@= category @></li>
         <li><span class="bookHeaders">Publisher: </span><@= publisher @></li>
     </ul>
-
     <button class="addtocart">Add to cart</button>
+    <button class="addNewBook">Add New Book</button>
+    </div>
+</script>
+
+<script id="AddBookTemplate" type="text/template">
+    <div id="addBook">
+        <form id="addBookForm">
+            <div>
+                <label for="coverImage">CoverImage: </label><input id="coverImage" type="file" />
+                <label for="title">Title: </label><input id="title" type="text" />
+                <label for="author">Author: </label><input id="author" type="text" />
+                <label for="category">Category: </label><input id="category" type="text" />
+                <label for="publisher">Publisher: </label><input id="publisher" type="text" />
+                <button id="addBookBtn" >Add Book</button>
+            </div>
+        </form>
     </div>
 </script>
 </body>

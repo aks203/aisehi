@@ -13,6 +13,7 @@
 <spring:url value="/resources/model/AuthModel.js" var="AuthModel" />
 <spring:url value="/resources/view/LoginView.js" var="LoginView" />
 <spring:url value="/resources/view/BookView.js" var="BookView" />
+<spring:url value="/resources/view/AddBookView.js" var="AddBookView" />
 <spring:url value="/resources/view/Library.js" var="LibraryView" />
 
 
@@ -26,4 +27,5 @@
 <script src="${AuthModel}"></script>
 <script src="${LoginView}"></script>
 <script src="${DashboardView}"></script>
+<script src="${AddBookView}"></script>
 <script src="${DashboardModel}"></script>

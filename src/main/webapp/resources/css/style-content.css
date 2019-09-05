@@ -3,6 +3,50 @@ body {
     background: #63738a;
 }
 
+
+#addBookForm label {
+    width: 100px;
+    margin-right: 10px;
+    text-align: right;
+    line-height: 25px;
+}
+
+#addBookForm label, #addBookForm input {
+    display: block;
+    margin-bottom: 10px;
+    float: left;
+}
+
+#addBookForm label[for="title"], #addBookForm label[for="releaseDate"] {
+    clear: both;
+}
+
+#addBookBtn {
+    display: block;
+    margin: 5px 20px 10px 10px;
+    float: right;
+    clear: both;
+}
+
+#addBookForm div {
+    width: 550px;
+}
+
+#addBookForm div:after {
+    content: "";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+    font-size: 0;
+    line-height: 0;
+}
+
+
+
+
+
+
 .bookItem span{
     opacity: 0.5;
 }
