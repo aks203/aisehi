@@ -18,10 +18,11 @@ public interface UserDAO{
     /**
      *
      * @param email
-     * @param password
      * @return
      */
-    User getUser(String email, String password);
+    User getUser(String email);
 
     boolean deleteUser(int user_id);
+
+    String getPasswordByEmail(String email);
 }

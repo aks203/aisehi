@@ -50,12 +50,9 @@ public class Book {
     public Book() {
     }
 
-
     /**
      * Getters and setters
      */
-
-
 
     public Order getOrder() {
         return order;

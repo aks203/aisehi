@@ -5,6 +5,7 @@ import com.aks.Entity.User;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,9 @@ import java.util.regex.Pattern;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserDAO userDAO;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * @param id
@@ -51,13 +55,18 @@ public class UserServiceImpl implements UserService {
      * @param password
      * @return
      */
+
     @Override
     public User getUser(String email, String password) {
         if(checkEmail(email)==false){
             return null;
         }
-        return userDAO.getUser(email, password);
-
+        if (passwordEncoder.matches(password, userDAO.getPasswordByEmail(email))) {
+            return userDAO.getUser(email);
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
@@ -82,7 +91,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User createUser(String name, String email, String password, String language) {
-        User user = new User(name, email, password, language);
+        User user = new User(name, email, passwordEncoder.encode(password), language);
         userDAO.createUser(user);
         return user;
 

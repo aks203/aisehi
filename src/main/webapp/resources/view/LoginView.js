@@ -29,10 +29,11 @@ app.LoginView=Backbone.View.extend({
                     $("#loginMsg").html(response.msg);
                 }
                 else {
-                    sessionStorage.setItem("user_id", response.user.id);
+                    debugger;
+                    sessionStorage.setItem("response", JSON.stringify(response));
                     // app.user_id=response.user.id;
-                    showDashboard();
-                    console.log(sessionStorage.getItem("user_id"));
+                    showDashboard(response);
+                    console.log(sessionStorage.getItem("response"));
                 }
             },
             error: function (model, response) {
