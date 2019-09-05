@@ -9,6 +9,7 @@ body {
     margin-right: 10px;
     text-align: right;
     line-height: 25px;
+    color: black;
 }
 
 #addBookForm label, #addBookForm input {

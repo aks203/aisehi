@@ -13,22 +13,26 @@ app.LibraryView = Backbone.View.extend({
         var formData = {};
 
         $( '#addBookForm div' ).children( 'input' ).each( function( i, el ) {
+            debugger;
             if( $( el ).val() !== '' )
             {
                 formData[ el.id ] = $( el ).val();
             }
         });
         this.collection.add( new app.BookModel( formData ) );
+        alert("Book added successfully.")
+        var frm=$("#addBookForm")[0];
+        frm.reset();
     },
 
     initialize: function( initialBooks ) {
-        // this.listenTo( this.collection, 'add', showDashboard(JSON.parse(sessionStorage.getItem("response"))));
         this.collection = new app.BookCollection(initialBooks);
         this.render();
     },
 
     // render library by rendering each book in its collection
     render: function() {
+        $("#content").empty();
         console.log("rendering library view...")
         this.collection.each(function( item ) {
             this.renderBook( item );

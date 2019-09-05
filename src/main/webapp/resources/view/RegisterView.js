@@ -51,14 +51,11 @@ app.signupView = Backbone.View.extend({
 });
 
 $(document).ready(function () {
-    debugger;
     if(JSON.parse(sessionStorage.getItem("response"))==null) {
-        debugger;
         new app.signupView({model: new app.User});
     }
     else {
         console.log(JSON.parse(sessionStorage.getItem("response")));
-        debugger;
         showDashboard(JSON.parse(sessionStorage.getItem("response")));
     }
 })

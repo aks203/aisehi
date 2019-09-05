@@ -29,7 +29,6 @@ app.LoginView=Backbone.View.extend({
                     $("#loginMsg").html(response.msg);
                 }
                 else {
-                    debugger;
                     sessionStorage.setItem("response", JSON.stringify(response));
                     // app.user_id=response.user.id;
                     showDashboard(response);
