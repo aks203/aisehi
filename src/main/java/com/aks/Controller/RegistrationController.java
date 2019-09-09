@@ -5,6 +5,7 @@ import com.aks.Service.UserService;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController
+@Controller
 public class RegistrationController {
     @Autowired
     UserService userService;
@@ -69,5 +70,10 @@ public class RegistrationController {
             userDetails.put("msg", "Error creating user. Please correct details.");
             return userDetails;
         }
+    }
+
+    @RequestMapping(value = "/", method=RequestMethod.GET)
+    public String home(){
+        return "index";
     }
 }

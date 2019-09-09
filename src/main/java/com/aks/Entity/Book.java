@@ -28,7 +28,7 @@ public class Book {
     @JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")
     private Order order;
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books", fetch = FetchType.EAGER)
     private List<Cart> carts=new ArrayList<Cart>();
     /**
      *

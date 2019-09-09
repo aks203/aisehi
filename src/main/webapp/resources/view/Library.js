@@ -2,7 +2,6 @@ var app = app || {};
 
 app.LibraryView = Backbone.View.extend({
     el: '#content',
-    model: app.BookCollection,
 
     events:{
         'click #addBookBtn':'addBook'
@@ -13,21 +12,27 @@ app.LibraryView = Backbone.View.extend({
         var formData = {};
 
         $( '#addBookForm div' ).children( 'input' ).each( function( i, el ) {
-            debugger;
             if( $( el ).val() !== '' )
             {
                 formData[ el.id ] = $( el ).val();
             }
         });
-        this.collection.add( new app.BookModel( formData ) );
+        this.collection.create( formData );
+        debugger;
         alert("Book added successfully.")
         var frm=$("#addBookForm")[0];
         frm.reset();
     },
 
     initialize: function( initialBooks ) {
-        this.collection = new app.BookCollection(initialBooks);
+        this.collection = new app.BookCollection();
+        // The models are fetched asynchronously after the page is rendered.
+        // When the fetch completes, Backbone fires the reset event,
+        // as requested by the reset: true option, and our listener re-renders the view.
+        this.collection.fetch({reset: true});
         this.render();
+        this.listenTo( this.collection, 'reset', this.render );
+        // this.listenTo( this.collection, 'add', this.renderBook );
     },
 
     // render library by rendering each book in its collection
