@@ -6,7 +6,7 @@ app.LoginView=Backbone.View.extend({
     template: _.template($('#login-template').html(), {interpolate: /\<\@\=(.+?)\@\>/gim}),
 
     events: {
-        'click #login-btn': 'onLoginFormSubmit',
+        'click #login-btn': 'onLoginFormSubmit'
         // 'click #showLogin': 'showLoginForm',
     },
 
@@ -15,15 +15,19 @@ app.LoginView=Backbone.View.extend({
         this.render();
     },
 
+
+
     onLoginFormSubmit:function(e){
         this.model.set({
             email: $(".email").val(),
             password: $(".password").val()
         });
+        var self=this;
         this.model.save({
             type: "POST",
             contentType: "application/json"
         }, {success:function (model, response) {
+            debugger;
                 console.log("Login success");
                 if(response.status=="Error"){
                     $("#loginMsg").html(response.msg);
@@ -31,6 +35,10 @@ app.LoginView=Backbone.View.extend({
                 else {
                     sessionStorage.setItem("response", JSON.stringify(response));
                     // app.user_id=response.user.id;
+                    self.undelegateEvents();
+                    self.$el.empty();
+                    // $(self.el).clear();
+                    debugger;
                     showDashboard(response);
                     console.log(sessionStorage.getItem("response"));
                 }

@@ -1,7 +1,10 @@
 package com.aks.Controller;
 
 import com.aks.Entity.User;
+import com.aks.POJO.UserPojo;
+import com.aks.Service.TokenService;
 import com.aks.Service.UserService;
+import com.aks.security.JwtGenerator;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -19,12 +22,18 @@ public class RegistrationController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    JwtGenerator jwtGenerator;
+
+    @Autowired
+    TokenService tokenService;
+
     @RequestMapping(value = "/login")
     public @ResponseBody Map<String, Object> login(
-            @RequestBody User user){
+            @RequestBody UserPojo user){
         Map<String, Object> userDetails = new HashMap<String, Object>();
         try {
-            User newUser=userService.getUser(user.getEmail(), user.getPassword());
+            UserPojo newUser=userService.getUser(user.getEmail(), user.getPassword());
             if(newUser==null){
                 userDetails.put("status", "Error");
                 userDetails.put("msg", "Login unsuccessful! Please check details.");
@@ -33,6 +42,15 @@ public class RegistrationController {
             userDetails.put("user", newUser);
             userDetails.put("status", "Success");
             userDetails.put("msg", "Login successful. Enjoy.");
+            try {
+                String token = jwtGenerator.generate(newUser);
+                tokenService.saveToken(newUser.getId(), token);
+            }catch (Exception ex){
+                userDetails.put("status", "Error");
+                userDetails.put("msg", "Error generating token. Please try after sometime.");
+                return userDetails;
+            }
+//            userDetails.put("auth-token", token);
             return userDetails;
         }catch (Exception ex){
             ex.printStackTrace();
@@ -45,7 +63,7 @@ public class RegistrationController {
     @RequestMapping(value = "/register", consumes = "application/json")
      public @ResponseBody Map<String, Object> registerNewUser(
             HttpServletRequest request,
-            @RequestBody User user,
+            @RequestBody UserPojo user,
             HttpServletResponse response){
         Map<String, Object> userDetails = new HashMap<String, Object>();
         try {

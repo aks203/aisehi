@@ -52,7 +52,6 @@ public class User implements Serializable {
     @Transient
     private String userMsg;
 
-
     /**
      * Default Constructor
      */

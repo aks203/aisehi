@@ -2,6 +2,7 @@ package com.aks.Service;
 
 import com.aks.DAO.UserDAO;
 import com.aks.Entity.User;
+import com.aks.POJO.UserPojo;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -9,8 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.regex.Pattern;
 
 @Service
@@ -53,22 +52,32 @@ public class UserServiceImpl implements UserService {
      *
      * @param email
      * @param password
-     * @return
+     * @return User POJO class
      */
 
     @Override
-    public User getUser(String email, String password) {
+    public UserPojo getUser(String email, String password) {
         if(checkEmail(email)==false){
             return null;
         }
         if (passwordEncoder.matches(password, userDAO.getPasswordByEmail(email))) {
-            return userDAO.getUser(email);
+            User user= userDAO.getUser(email);
+            UserPojo userPojo=new UserPojo();
+            userPojo.setId(user.getId());
+            userPojo.setName(user.getName());
+            userPojo.setEmail(user.getEmail());
+            userPojo.setLanguage(user.getLanguage());
+            return userPojo;
         }
         else {
             return null;
         }
     }
 
+    /**
+     *
+     * @param updatedUser
+     */
     @Override
     public void updateUser(User updatedUser) {
         User user = userDAO.getUser(updatedUser.getId());
@@ -87,13 +96,17 @@ public class UserServiceImpl implements UserService {
      * @param email
      * @param password
      * @param language
-     * @return
+     * @return User POJO class
      */
     @Override
-    public User createUser(String name, String email, String password, String language) {
+    public UserPojo createUser(String name, String email, String password, String language) {
         User user = new User(name, email, passwordEncoder.encode(password), language);
         userDAO.createUser(user);
-        return user;
-
+        UserPojo userPojo=new UserPojo();
+        userPojo.setId(user.getId());
+        userPojo.setName(user.getName());
+        userPojo.setEmail(user.getEmail());
+        userPojo.setLanguage(user.getLanguage());
+        return userPojo;
     }
 }

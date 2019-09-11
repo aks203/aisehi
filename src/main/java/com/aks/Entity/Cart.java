@@ -13,14 +13,14 @@ public class Cart {
     @Column(name ="CART_ID", nullable = false, unique = true)
     private int cartId;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "Cart_Items",
-            joinColumns = { @JoinColumn(name = "CART_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "BOOK_ID") }
-    )
+//    @ManyToMany(cascade = { CascadeType.ALL })
+//    @JoinTable(
+//            name = "Cart_Items",
+//            joinColumns = { @JoinColumn(name = "CART_ID") },
+//            inverseJoinColumns = { @JoinColumn(name = "BOOK_ID") }
+//    )
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<Book> books=new ArrayList<Book>();
-
 
     @OneToOne(mappedBy = "cart")
     private User user;

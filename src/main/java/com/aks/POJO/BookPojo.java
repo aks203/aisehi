@@ -1,38 +1,25 @@
-package com.aks.Entity;
+package com.aks.POJO;
 
-import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "BOOK")
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "BOOK_ID", nullable = false, unique = true)
+public class BookPojo {
+
     private int book_id;
 
-    @Column(name = "TITLE", nullable = false)
     private String title;
 
-    @Column(name = "AUTHOR", nullable = false)
     private String author;
 
-    @Column(name = "CATEGORY")
     private String category;
 
-    @Column(name = "PUBLISHER")
     private String publisher;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")
-    private Order order;
+    private OrderPojo order;
 
-//    @ManyToOne
-//    @JoinColumn(name = "Cart_ID", nullable = false)
-//    private Cart cart;
-//    @ManyToMany(mappedBy = "books", fetch = FetchType.EAGER)
-//    private List<Cart> carts=new ArrayList<Cart>();
+    private List<CartPojo> carts=new ArrayList<CartPojo>();
+
     /**
      *
      * @param title
@@ -40,7 +27,7 @@ public class Book {
      * @param category
      * @param publisher
      */
-    public Book(String title, String author, String category, String publisher) {
+    public BookPojo(String title, String author, String category, String publisher) {
         this.title = title;
         this.author = author;
         this.category = category;
@@ -50,34 +37,26 @@ public class Book {
     /**
      * Default Constructor
      */
-    public Book() {
+    public BookPojo() {
     }
 
     /**
      * Getters and setters
      */
 
-    public Order getOrder() {
+    public OrderPojo getOrder() {
         return order;
     }
 
-    public int getBook_id() {
-        return book_id;
+    public List<CartPojo> getCarts() {
+        return carts;
     }
 
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
+    public void setCarts(List<CartPojo> carts) {
+        this.carts = carts;
     }
 
-//    public Cart getCart() {
-//        return cart;
-//    }
-//
-//    public void setCart(Cart cart) {
-//        this.cart = cart;
-//    }
-
-    public void setOrder(Order order) {
+    public void setOrder(OrderPojo order) {
         this.order = order;
     }
 

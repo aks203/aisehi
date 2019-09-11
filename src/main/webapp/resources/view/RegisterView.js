@@ -17,10 +17,16 @@ app.signupView = Backbone.View.extend({
     },
 
     showLoginForm:function(e) {
-    new app.LoginView({model: new app.Auth()})
-},
+        // this.undelegateEvents();
+        // this.$el.empty();
+        debugger;
+        app.loginView=new app.LoginView({model: new app.Auth()})
+    },
 
     showRegisterForm: function(e){
+        // app.loginView.undelegateEvents();
+        // app.loginView.empty();
+        debugger;
       this.render();
     },
 

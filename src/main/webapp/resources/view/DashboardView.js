@@ -48,3 +48,20 @@ function showDashboard(response) {
             })
         });
 };
+
+function getUserId() {
+    var user_id=JSON.parse(sessionStorage.getItem("response")).user.id;
+    if(user_id!=null)
+        return user_id;
+    else
+        return null;
+};
+
+function logout() {
+    alert("Invalid session. Logging you out.");
+    sessionStorage.clear();
+    // app.loginView=null;
+    debugger;
+    app.DashboardView.libraryView=null;
+    new app.LoginView({model: new app.Auth()});
+}

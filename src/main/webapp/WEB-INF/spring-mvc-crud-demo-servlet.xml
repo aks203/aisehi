@@ -69,6 +69,13 @@
 	 <!--Add support for reading web resources: css, images, js, etc ... -->
 	<mvc:resources location="/resources/" mapping="/resources/**" />
 
+	<!-- Configuring interceptors based on URI -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/api/**" />
+			<bean class="com.aks.config.LoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
 
 

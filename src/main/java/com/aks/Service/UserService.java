@@ -3,13 +3,14 @@ package com.aks.Service;
 import com.aks.Entity.Order;
 import com.aks.Entity.Subscription;
 import com.aks.Entity.User;
+import com.aks.POJO.UserPojo;
 
 import java.util.List;
 
 public interface UserService {
     boolean checkEmail(String email);
     //Create a subscription object using subsType int var. Then create user obj.
-    User createUser(String name, String email, String password, String language);
+    UserPojo createUser(String name, String email, String password, String language);
 
     /**
      *
@@ -23,7 +24,7 @@ public interface UserService {
      * @param password
      * @return User
      */
-    User getUser(String email, String password);
+    UserPojo getUser(String email, String password);
 
     /**
      *

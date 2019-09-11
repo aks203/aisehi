@@ -17,9 +17,18 @@ app.LibraryView = Backbone.View.extend({
                 formData[ el.id ] = $( el ).val();
             }
         });
-        this.collection.create( formData );
+        this.collection.create( formData,
+            {   wait: true,
+                headers: {'user_id' :getUserId()},
+                success: function (response){
+                    alert("Book added successfully.")
+                },
+                error:function (response) {
+                console.log(response);
+                    logout();
+                }
+            } );
         debugger;
-        alert("Book added successfully.")
         var frm=$("#addBookForm")[0];
         frm.reset();
     },
@@ -29,10 +38,19 @@ app.LibraryView = Backbone.View.extend({
         // The models are fetched asynchronously after the page is rendered.
         // When the fetch completes, Backbone fires the reset event,
         // as requested by the reset: true option, and our listener re-renders the view.
-        this.collection.fetch({reset: true});
+        this.collection.fetch({reset: true,
+            success: function (response) {
+               console.log(response.toJSON());
+               debugger;
+            },
+            error: function (response) {
+                console.log(response.toJSON());
+                return logout();
+            },
+            wait: true,
+            headers: {'user_id' :getUserId()}});
         this.render();
         this.listenTo( this.collection, 'reset', this.render );
-        // this.listenTo( this.collection, 'add', this.renderBook );
     },
 
     // render library by rendering each book in its collection

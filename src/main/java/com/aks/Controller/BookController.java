@@ -5,6 +5,7 @@ import com.aks.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,13 @@ public class BookController {
 
     @GetMapping()
     public @ResponseBody List<Book> getBooks(){
-        return bookService.getBooks();
+        try {
+            return bookService.getBooks();
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            return new ArrayList<Book>();
+        }
     }
 
     @PostMapping()

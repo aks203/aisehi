@@ -14,6 +14,8 @@ app.BookView=Backbone.View.extend({
         $.ajax({
             url: '/api/books/'+id,
             type: 'DELETE',
+            wait: true,
+            headers: {'user_id' :getUserId()},
             success: function(result) {
                 debugger;
                 alert(result);

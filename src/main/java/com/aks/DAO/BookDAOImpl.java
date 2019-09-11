@@ -50,7 +50,7 @@ public class BookDAOImpl implements BookDAO {
     @Override
     public int deleteBook(Integer id){
         Session currentSession=sessionFactory.getCurrentSession();
-        Query q=currentSession.createQuery("delete from Book where id= :id");
+        Query q=currentSession.createQuery("delete from Book where book_id= :id");
         q.setParameter("id", id);
         return q.executeUpdate();
     }
