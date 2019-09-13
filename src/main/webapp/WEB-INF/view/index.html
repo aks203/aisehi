@@ -60,6 +60,10 @@
             <div class="form-group">
                 <input type="button" id="register" class="btn btn-success btn-lg btn-block" value="Register Now"/>
             </div>
+            <div class="form-group">
+                <input type="checkbox" id="role" name="role" value="admin">I'm an Admin
+            </div>
+
             <p class="text-danger" id="regMsg"></p>
         </form>
         <div class="text-center">Already have an account?
@@ -111,7 +115,9 @@
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
         <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
             <div class="mdl-layout__header-row">
-                <span class="mdl-layout-title"><@= response.user.name @></span>
+                <span class="mdl-layout-title" id="currentView">
+                    <!--<@= response.user.name @>-->
+                </span>
                 <div class="mdl-layout-spacer"></div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
                     <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
@@ -143,10 +149,12 @@
             <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
                 <a class="mdl-navigation__link"  id="home" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
                 <a class="mdl-navigation__link" id="browse" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Browse</a>
-                <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>Cart</a>
+                <a class="mdl-navigation__link" id="showCart" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>Cart</a>
                 <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Orders</a>
+                <@ if (app.role == "admin") { @>
                 <a class="mdl-navigation__link" id="addNewBook" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Add New Book</a>
-
+                <@ } @>
+                <a class="mdl-navigation__link" id="logoutBtn" href="#" onclick="logout()"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Logout</a>
             </nav>
         </div>
         <main class="mdl-layout__content mdl-color--grey-100">
@@ -169,10 +177,26 @@
         <li><span class="bookHeaders">Category: </span><@= category @></li>
         <li><span class="bookHeaders">Publisher: </span><@= publisher @></li>
     </ul>
-    <button class="addtocart">Add to cart</button>
-    <button class="deleteBook">Delete this book</button>
+    <button class="addToCart">Add to cart</button>
+        <@ if (app.role == "admin") { @>
+        <button class="deleteBook">Delete this book</button>
+        <@ } @>
     </div>
 </script>
+
+<script id="cartTemplate" type="text/template">
+    <div class="cartItem">
+        <img src="<@= coverImage @>"/>
+        <ul>
+            <li><span class="bookHeaders">Title: </span><@= title @></li>
+            <li><span class="bookHeaders">Author: </span><@= author @></li>
+            <li><span class="bookHeaders">Category: </span><@= category @></li>
+            <li><span class="bookHeaders">Publisher: </span><@= publisher @></li>
+        </ul>
+        <button class="deleteFromCart">Remove this book</button>
+    </div>
+</script>
+
 
 <script id="AddBookTemplate" type="text/template">
     <div id="addBook">

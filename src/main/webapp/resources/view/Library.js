@@ -25,7 +25,7 @@ app.LibraryView = Backbone.View.extend({
                 },
                 error:function (response) {
                 console.log(response);
-                    logout();
+                logout();
                 }
             } );
         debugger;
@@ -71,6 +71,3 @@ app.LibraryView = Backbone.View.extend({
         this.$el.append( bookView.render().el );
     }
 });
-
-
-

@@ -3,15 +3,35 @@ var app = app || {};
 app.DashboardView = Backbone.View.extend({
     el: $("#container"),
 
-    events:{
+    events: {
         'click #addNewBook': 'showAddBookView',
         'click #home': 'showLibrary',
-        'click #browse': 'showLibrary'
+        'click #browse': 'showLibrary',
+        'click #showCart': 'showCart'
     },
 
-    showLibrary:function(){
+    destroy: function () {
+        this.undelegateEvents();
+        this.$el.removeData().unbind();
+        this.$el.empty();
+    },
+
+    showCart: function () {
+        $("#currentView").empty().append("Cart");
+
+        if (app.DashboardView.cartView != null) {
+            var self = app.DashboardView.cartView;
+            self.undelegateEvents();
+            self.$el.removeData().unbind();
+            self.$el.empty();
+        }
+        app.DashboardView.cartView = new app.CartView();
+    },
+
+    showLibrary: function () {
         debugger;
-        if(app.DashboardView.libraryView!=null) {
+        $("#currentView").empty().append("Books");
+        if (app.DashboardView.libraryView != null) {
             app.DashboardView.libraryView.render();
         }
         else {
@@ -19,14 +39,17 @@ app.DashboardView = Backbone.View.extend({
         }
     },
 
-    showAddBookView:function(e){
+    showAddBookView: function () {
         debugger;
-        e.preventDefault();
+        $("#currentView").empty().append("Add new Book");
         debugger;
         new app.AddBookView();
     },
 
-    template: _.template($('#headerTemplate').html(), {interpolate: /\<\@\=(.+?)\@\>/gim}),
+    template: _.template($('#headerTemplate').html(), {
+        interpolate: /\<\@\=(.+?)\@\>/gim,
+        evaluate: /\<\@(.+?)\@\>/gim
+    }),
 
     initialize: function () {
         console.log("Dashboard initialized...");
@@ -40,28 +63,3 @@ app.DashboardView = Backbone.View.extend({
         return this;
     }
 })
-
-function showDashboard(response) {
-       new app.DashboardView({
-            model: new app.Dashboard({
-                response: response
-            })
-        });
-};
-
-function getUserId() {
-    var user_id=JSON.parse(sessionStorage.getItem("response")).user.id;
-    if(user_id!=null)
-        return user_id;
-    else
-        return null;
-};
-
-function logout() {
-    alert("Invalid session. Logging you out.");
-    sessionStorage.clear();
-    // app.loginView=null;
-    debugger;
-    app.DashboardView.libraryView=null;
-    new app.LoginView({model: new app.Auth()});
-}

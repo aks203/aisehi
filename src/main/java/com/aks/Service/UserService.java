@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserService {
     boolean checkEmail(String email);
     //Create a subscription object using subsType int var. Then create user obj.
-    UserPojo createUser(String name, String email, String password, String language);
+    UserPojo createUser(String name, String email, String password, String language, String role);
 
     /**
      *

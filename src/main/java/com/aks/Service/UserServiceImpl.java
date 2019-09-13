@@ -67,6 +67,7 @@ public class UserServiceImpl implements UserService {
             userPojo.setName(user.getName());
             userPojo.setEmail(user.getEmail());
             userPojo.setLanguage(user.getLanguage());
+            userPojo.setRole(user.getRole());
             return userPojo;
         }
         else {
@@ -99,14 +100,15 @@ public class UserServiceImpl implements UserService {
      * @return User POJO class
      */
     @Override
-    public UserPojo createUser(String name, String email, String password, String language) {
-        User user = new User(name, email, passwordEncoder.encode(password), language);
+    public UserPojo createUser(String name, String email, String password, String language, String role) {
+        User user = new User(name, email, passwordEncoder.encode(password), language, role);
         userDAO.createUser(user);
         UserPojo userPojo=new UserPojo();
         userPojo.setId(user.getId());
         userPojo.setName(user.getName());
         userPojo.setEmail(user.getEmail());
         userPojo.setLanguage(user.getLanguage());
+        userPojo.setRole(user.getRole());
         return userPojo;
     }
 }

@@ -46,34 +46,43 @@ body {
 
 
 
+/*CSS for Book View in dashboard and cart*/
 
-
-.bookItem span{
-    opacity: 0.5;
-}
-
-.bookItem {
+.cartItem {
     outline: 1px solid #aaa;
-    width: 350px;
+    width: 800px;
     height: 150px;
     background-color: #fff;
     float: left;
     margin: 20px;
 }
 
-.bookItem img {
+.bookItem span, .cartItem span{
+    opacity: 0.5;
+}
+
+.bookItem {
+     outline: 1px solid #aaa;
+     width: 350px;
+     height: 150px;
+     background-color: #fff;
+     float: left;
+     margin: 20px;
+ }
+
+.bookItem img, .cartItem img{
     float: left;
     margin: 10px;
 
 }
 
- .bookItem ul {
+ .bookItem ul, .cartItem ul{
     list-style-type: none;
     margin-bottom: 0;
     color: black;
 }
 
-.bookItem button {
+.bookItem button, .cartItem button {
     float: right;
     margin: 10px;
 }

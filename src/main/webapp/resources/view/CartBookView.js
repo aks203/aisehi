@@ -1,34 +1,18 @@
 var app=app||{};
 
-app.BookView=Backbone.View.extend({
+app.CartBookView=Backbone.View.extend({
     tagname: 'div',
-    classname: "bookContainer",
+    classname: "cartBookContainer",
     model: app.BookModel,
     events: {
-        'click .deleteBook': 'deleteBook',
-        'click .addToCart': 'addToCart'
+        'click .deleteFromCart':'deleteFromCart'
     },
 
-    addToCart: function(){
+    deleteFromCart: function() {
         var book_id=this.model.attributes.id;
-        var user_id=getUserId();
-        $.ajax({
-            url: '/api/cart/add/'+user_id+'/'+book_id,
-            type: 'POST',
-            wait: true,
-            headers: {'user_id' :user_id},
-            success: function(result) {
-                debugger;
-                alert(result);
-            }
-        });
-    },
-
-    deleteBook: function() {
-        var id=this.model.attributes.id;
         var self=this;
         $.ajax({
-            url: '/api/books/'+id,
+            url: '/api/cart/'+getUserId()+'/'+book_id,
             type: 'DELETE',
             wait: true,
             headers: {'user_id' :getUserId()},
@@ -44,7 +28,7 @@ app.BookView=Backbone.View.extend({
         debugger;
     },
 
-    template: _.template($('#bookTemplate').html(), {interpolate: /\<\@\=(.+?)\@\>/gim, evaluate: /\<\@(.+?)\@\>/gim}),
+    template: _.template($('#cartTemplate').html(), {interpolate: /\<\@\=(.+?)\@\>/gim, evaluate: /\<\@(.+?)\@\>/gim}),
 
     initialize:function(){
         console.log("Book initialized...");

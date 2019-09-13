@@ -28,11 +28,6 @@ public class Book {
     @JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")
     private Order order;
 
-//    @ManyToOne
-//    @JoinColumn(name = "Cart_ID", nullable = false)
-//    private Cart cart;
-//    @ManyToMany(mappedBy = "books", fetch = FetchType.EAGER)
-//    private List<Cart> carts=new ArrayList<Cart>();
     /**
      *
      * @param title

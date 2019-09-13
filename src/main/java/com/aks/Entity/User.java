@@ -35,19 +35,23 @@ public class User implements Serializable {
     @Column(name = "LANGUAGE")
     private String language;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
-    //Lazy loading problem while rendering JSON in Backbone
-    //Thus, used @JsonIgnore.
-    @JsonIgnore
-    private List<Order> orders=new ArrayList<Order>();
+    @Column(name = "ROLE")
+    private String role;
+
+//    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
+//    //Lazy loading problem while rendering JSON in Backbone
+//    //Thus, used @JsonIgnore.
+//    @JsonIgnore
+//    private List<Order> orders=new ArrayList<Order>();
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "SUBS_ID", referencedColumnName = "SUBS_ID")
     private Subscription subscription;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")
-    private Cart cart;
+//    @JsonIgnore
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")
+//    private Cart cart;
 
     @Transient
     private String userMsg;
@@ -80,20 +84,27 @@ public class User implements Serializable {
      * @param email
      * @param password
      * @param language
+     * @param role
      */
-    public User(String name, @Email(message = "Please enter correct email-id.") String email, String password, String language) {
+    public User(@NotNull String name, @NotNull String email, @NotNull String password, @NotNull String language, String role) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.language = language;
+        this.role = role;
     }
 
-    public String getUserMsg() {
-        return userMsg;
+    public String getRole() {
+        return role;
     }
 
-    public void setUserMsg(String userMsg) {
-        this.userMsg = userMsg;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public int getId() {
@@ -130,14 +141,6 @@ public class User implements Serializable {
 
     public void setLanguage(String language) {
         this.language = language;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
     }
 
     public Subscription getSubscription() {

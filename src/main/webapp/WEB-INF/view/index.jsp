@@ -4,6 +4,7 @@
 
 <%@include file="./index.html" %>
 
+<spring:url value="/resources/functions.js" var="Functions" />
 <spring:url value="/resources/view/RegisterView.js" var="RegView" />
 <spring:url value="/resources/model/BookModel.js" var="BookModel" />
 <spring:url value="/resources/collection/BookCollection.js" var="BookCollection" />
@@ -15,9 +16,13 @@
 <spring:url value="/resources/view/BookView.js" var="BookView" />
 <spring:url value="/resources/view/AddBookView.js" var="AddBookView" />
 <spring:url value="/resources/view/Library.js" var="LibraryView" />
+<spring:url value="/resources/view/CartView.js" var="CartView" />
+<spring:url value="/resources/collection/CartCollection.js" var="CartCollection" />
+<spring:url value="/resources/view/CartBookView.js" var="CartBookView" />
 
 
 <script src="resources/mdlComponenthandler.js"></script>
+<script src="${Functions}"></script>
 <script src="${BookModel}"></script>
 <script src="${BookCollection}"></script>
 <script src="${LibraryView}"></script>
@@ -29,3 +34,6 @@
 <script src="${DashboardView}"></script>
 <script src="${AddBookView}"></script>
 <script src="${DashboardModel}"></script>
+<script src="${CartView}"></script>
+<script src="${CartCollection}"></script>
+<script src="${CartBookView}"></script>

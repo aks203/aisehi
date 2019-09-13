@@ -72,7 +72,7 @@ public class RegistrationController {
                 userDetails.put("msg", "\"Error creating user. Please fill all the details correctly..\"");
                 return userDetails;
             }
-            userDetails.put("user", userService.createUser(user.getName(), user.getEmail(), user.getPassword(), user.getLanguage()));
+            userDetails.put("user", userService.createUser(user.getName(), user.getEmail(), user.getPassword(), user.getLanguage(), user.getRole()));
             userDetails.put("status", "Success");
             userDetails.put("msg", "User successfully created. Now, you can login.");
             return userDetails;

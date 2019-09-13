@@ -1,8 +1,6 @@
 package com.aks.Entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "CART")
@@ -10,41 +8,82 @@ public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="CART_ID", nullable = false, unique = true)
-    private int cartId;
+    @Column(name = "CART_ID", nullable = false, unique = true)
+    private int cart_id;
 
-//    @ManyToMany(cascade = { CascadeType.ALL })
-//    @JoinTable(
-//            name = "Cart_Items",
-//            joinColumns = { @JoinColumn(name = "CART_ID") },
-//            inverseJoinColumns = { @JoinColumn(name = "BOOK_ID") }
-//    )
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    private List<Book> books=new ArrayList<Book>();
+    @Column(name = "USER_ID")
+    private int user_id;
 
-    @OneToOne(mappedBy = "cart")
-    private User user;
+    @Column(name = "BOOK_ID")
+    private int book_id;
 
+    /**
+     *
+     * @param user_id
+     * @param book_id
+     */
+    public Cart(int user_id, int book_id) {
+        this.user_id = user_id;
+        this.book_id = book_id;
+    }
+
+    /**
+     * Default Constructor
+     */
     public Cart() {
     }
 
     /**
+     * Sets new user_id.
      *
-     * @return
+     * @param user_id New value of user_id.
      */
-    public int getCartId() {
-        return cartId;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
-    public void setCartId(int cartId) {
-        this.cartId = cartId;
+    /**
+     * Gets user_id.
+     *
+     * @return Value of user_id.
+     */
+    public int getUser_id() {
+        return user_id;
     }
 
-    public List<Book> getBooks() {
-        return books;
+    /**
+     * Sets new cartId.
+     *
+     * @param cart_id New value of cartId.
+     */
+    public void setCart_id(int cart_id) {
+        this.cart_id = cart_id;
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
+    /**
+     * Gets cartId.
+     *
+     * @return Value of cartId.
+     */
+    public int getCart_id() {
+        return cart_id;
+    }
+
+    /**
+     * Gets book_id.
+     *
+     * @return Value of book_id.
+     */
+    public int getBook_id() {
+        return book_id;
+    }
+
+    /**
+     * Sets new book_id.
+     *
+     * @param book_id New value of book_id.
+     */
+    public void setBook_id(int book_id) {
+        this.book_id = book_id;
     }
 }

@@ -7,7 +7,7 @@ var app = app || {};
         name: '',
         email: '',
         password: '',
-        phone: '',
-        language: ''
+        language: '',
+        role: ''
     }
 });

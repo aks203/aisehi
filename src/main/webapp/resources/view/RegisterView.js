@@ -17,24 +17,20 @@ app.signupView = Backbone.View.extend({
     },
 
     showLoginForm:function(e) {
-        // this.undelegateEvents();
-        // this.$el.empty();
         debugger;
         app.loginView=new app.LoginView({model: new app.Auth()})
     },
 
     showRegisterForm: function(e){
-        // app.loginView.undelegateEvents();
-        // app.loginView.empty();
         debugger;
       this.render();
     },
 
     onRegFormSubmit: function (e) {
-        // e.preventDefault();
+        e.preventDefault();
         this.model.set({
             name: $("#name").val(), email: $("#email").val(),
-            password: $("#password").val(), phone: $("#phone").val(), language: $("#language").val()
+            password: $("#password").val(), language: $("#language").val(),role: $("#role:checked").val()
         });
         var o=this;
         this.model.save({
@@ -56,12 +52,3 @@ app.signupView = Backbone.View.extend({
     }
 });
 
-$(document).ready(function () {
-    if(JSON.parse(sessionStorage.getItem("response"))==null) {
-        new app.signupView({model: new app.User});
-    }
-    else {
-        console.log(JSON.parse(sessionStorage.getItem("response")));
-        showDashboard(JSON.parse(sessionStorage.getItem("response")));
-    }
-})

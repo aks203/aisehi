@@ -34,6 +34,8 @@ app.LoginView=Backbone.View.extend({
                 }
                 else {
                     sessionStorage.setItem("response", JSON.stringify(response));
+                    app.role=response.user.role;
+                    debugger;
                     // app.user_id=response.user.id;
                     self.undelegateEvents();
                     self.$el.empty();

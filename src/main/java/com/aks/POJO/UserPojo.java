@@ -14,6 +14,8 @@ public class UserPojo{
 
     private String language;
 
+    private String role;
+
     private CartPojo cart;
 
     /**
@@ -28,12 +30,30 @@ public class UserPojo{
      * @param email
      * @param password
      * @param language
+     * @param role
      */
-    public UserPojo(String name, String email, String password, String language) {
+    public UserPojo(String name, String email, String password, String language, String role) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.language = language;
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public CartPojo getCart() {
+        return cart;
+    }
+
+    public void setCart(CartPojo cart) {
+        this.cart = cart;
     }
 
     public int getId() {
@@ -84,7 +104,7 @@ public class UserPojo{
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", language='" + language + '\'' +
-                ", cart=" + cart +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

@@ -2,8 +2,6 @@ package com.aks.config;
 
 import com.aks.Service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.persistence.EntityNotFoundException;

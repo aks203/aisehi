@@ -41,8 +41,34 @@ public class BookPojo {
     }
 
     /**
+     *
+     * @param book_id
+     * @param title
+     * @param author
+     * @param category
+     * @param publisher
+     */
+    public BookPojo(int book_id, String title, String author, String category, String publisher) {
+        this.book_id = book_id;
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.publisher = publisher;
+    }
+
+
+    /**
      * Getters and setters
      */
+
+    public int getBook_id() {
+        return book_id;
+    }
+
+    public void setBook_id(int book_id) {
+        this.book_id = book_id;
+
+    }
 
     public OrderPojo getOrder() {
         return order;
