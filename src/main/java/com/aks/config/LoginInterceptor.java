@@ -1,7 +1,7 @@
 package com.aks.config;
 
 import com.aks.Service.TokenService;
-import com.aks.security.JwtGenerator;
+import com.aks.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -20,7 +20,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     TokenService tokenService;
 
     @Autowired
-    JwtGenerator jwtGenerator;
+    JwtUtil jwtUtil;
 
     /**
      *
@@ -41,7 +41,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             int user_id=Integer.parseInt(request.getHeader("user_id"));
             try {
                 String token=tokenService.getToken(user_id);
-                boolean isExpired=jwtGenerator.isTokenExpired(token);
+                boolean isExpired= jwtUtil.isTokenExpired(token);
                 if (isExpired){
                     return false;
                 }

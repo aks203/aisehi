@@ -172,10 +172,10 @@
     <div class="bookItem">
     <img src="<@= coverImage @>"/>
     <ul>
-        <li><span class="bookHeaders">Title: </span><@= title @></li>
-        <li><span class="bookHeaders">Author: </span><@= author @></li>
-        <li><span class="bookHeaders">Category: </span><@= category @></li>
-        <li><span class="bookHeaders">Publisher: </span><@= publisher @></li>
+        <li><span class="bookHeaders">Title: </span><span class="bookContent"><@= title @></span></li>
+        <li><span class="bookHeaders">Author: </span><span class="bookContent"><@= author @></span></li>
+        <li><span class="bookHeaders">Category: </span><span class="bookContent"><@= category @></span></li>
+        <li><span class="bookHeaders">Publisher: </span><span class="bookContent"><@= publisher @></span></li>
     </ul>
     <button class="addToCart">Add to cart</button>
         <@ if (app.role == "admin") { @>

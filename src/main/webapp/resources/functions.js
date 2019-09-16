@@ -38,6 +38,12 @@ function logout() {
     new app.LoginView({model: new app.Auth()});
 };
 
+function search(elem) {
+    if(event.key === 'Enter') {
+        alert(elem.value);
+    }
+}
+
 
 
 

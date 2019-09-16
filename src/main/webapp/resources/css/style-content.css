@@ -87,6 +87,13 @@ body {
     margin: 10px;
 }
 
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
 /*css for form*/
 .form-control {
     height: 40px;

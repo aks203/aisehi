@@ -7,8 +7,30 @@ app.DashboardView = Backbone.View.extend({
         'click #addNewBook': 'showAddBookView',
         'click #home': 'showLibrary',
         'click #browse': 'showLibrary',
-        'click #showCart': 'showCart'
+        'click #showCart': 'showCart',
+        'keyup #search': 'search'
     },
+
+    search: function(e){
+            setTimeout(function () {
+                $(".bookItem").removeClass('hide');
+                $(".bookItem").removeClass('show');
+                var g=$(e.target).val().toLowerCase();
+                $(".bookItem .bookContent").each(function() {
+                    var s = $(this).text().toLowerCase();
+                    var book=$(this).closest('.bookItem');
+                    if(!book.hasClass("show")){
+                        if(s.indexOf(g) == -1) {
+                            book.addClass("hide");
+                        } else {
+                            book.removeClass("hide");
+                            book.addClass("show");
+                        }
+                    }
+                        debugger;
+                });
+            }, 1500);
+        },
 
     destroy: function () {
         this.undelegateEvents();

@@ -1,19 +1,14 @@
 package com.aks.Controller;
 
-import com.aks.Entity.User;
 import com.aks.POJO.UserPojo;
 import com.aks.Service.TokenService;
 import com.aks.Service.UserService;
-import com.aks.security.JwtGenerator;
+import com.aks.security.JwtUtil;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +21,7 @@ public class RegistrationController {
     UserService userService;
 
     @Autowired
-    JwtGenerator jwtGenerator;
+    JwtUtil jwtUtil;
 
     @Autowired
     TokenService tokenService;
@@ -51,7 +46,7 @@ public class RegistrationController {
             userDetails.put("status", "Success");
             userDetails.put("msg", "Login successful. Enjoy.");
             try {
-                String token = jwtGenerator.generateToken(newUser);
+                String token = jwtUtil.generateToken(newUser);
                 tokenService.saveToken(newUser.getId(), token);
             }catch (Exception ex){
                 userDetails.put("status", "Error");

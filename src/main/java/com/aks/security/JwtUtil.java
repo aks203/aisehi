@@ -12,7 +12,7 @@ import java.util.Map;
  * Generates Jwt token against a user for security purposes
  */
 @Component
-public class JwtGenerator {
+public class JwtUtil {
 
     /**
      * @param token
