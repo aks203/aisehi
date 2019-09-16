@@ -17,6 +17,11 @@ public class CartDAOImpl implements CartDAO {
     @Autowired
     SessionFactory sessionFactory;
 
+    /**
+     *
+     * @param user_id
+     * @return List of all cart entities for that user
+     */
     @Override
     public List<Cart> getCart(Integer user_id) {
         Session currentSession=sessionFactory.getCurrentSession();
@@ -26,6 +31,11 @@ public class CartDAOImpl implements CartDAO {
         return userCarts;
     }
 
+    /**
+     *
+     * @param cart
+     * @return String message
+     */
     @Override
     public String addBookToCart(Cart cart) {
         Session currentSession = sessionFactory.getCurrentSession();
@@ -39,6 +49,10 @@ public class CartDAOImpl implements CartDAO {
         return "Book added to cart";
     }
 
+    /**
+     * @param cart
+     * @return 1 if deleted, else 0
+     */
     @Override
     public int deleteBookFromCart(Cart cart) {
         Session currentSession = sessionFactory.getCurrentSession();

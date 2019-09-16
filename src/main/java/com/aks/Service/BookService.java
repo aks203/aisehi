@@ -1,6 +1,7 @@
 package com.aks.Service;
 
 import com.aks.Entity.Book;
+import com.aks.POJO.BookPojo;
 
 import java.util.List;
 
@@ -9,11 +10,11 @@ public interface BookService {
      *
      * @return
      */
-    List<Book> getBooks();
+    List<BookPojo> getBooks();
 
-    Book addBook(Book book);
+    BookPojo addBook(BookPojo bookPojo);
 
-    Book getBookById(int id);
+    BookPojo getBookById(int id);
 
     String deleteBook(Integer id);
 }

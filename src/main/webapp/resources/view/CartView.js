@@ -47,5 +47,13 @@ app.CartView = Backbone.View.extend({
             model: item
         });
         this.$el.append( cartBookView.render().el );
+    },
+
+    destroy: function () {
+        this.undelegateEvents();
+        this.$el.removeData().unbind();
+        debugger;
+        this.$el.empty();
+
     }
 });

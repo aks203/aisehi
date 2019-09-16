@@ -2,10 +2,12 @@ package com.aks.Service;
 
 import com.aks.DAO.BookDAO;
 import com.aks.Entity.Book;
+import com.aks.POJO.BookPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,19 +17,63 @@ public class BookServiceImpl implements BookService {
     BookDAO bookDAO;
 
     @Override
-    public List<Book> getBooks(){
-        return bookDAO.getBooks();
+    public List<BookPojo> getBooks(){
+        List<BookPojo> bookPojoList = new ArrayList<>();
+        try {
+            List<Book> bookList = bookDAO.getBooks();
+            for (Book newBook : bookList) {
+                bookPojoList.add(new BookPojo(newBook.getBook_id(),
+                        newBook.getTitle(),
+                        newBook.getAuthor(),
+                        newBook.getCategory(),
+                        newBook.getPublisher(),
+                        newBook.getContent()));
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return bookPojoList;
     }
 
     @Override
-    public Book addBook(Book book){
-        int id=bookDAO.addBook(book);
-        return bookDAO.getBookById(id);
+    public BookPojo addBook(BookPojo bookPojo){
+        Book book=new Book(bookPojo.getTitle(),
+                bookPojo.getAuthor(),
+                bookPojo.getCategory(),
+                bookPojo.getContent(),
+                bookPojo.getPublisher());
+        try {
+            int id = bookDAO.addBook(book);
+            Book returnedBook = bookDAO.getBookById(id);
+            BookPojo returnedBookPojo = new BookPojo(returnedBook.getBook_id(),
+                    returnedBook.getTitle(),
+                    returnedBook.getAuthor(),
+                    returnedBook.getCategory(),
+                    returnedBook.getPublisher(),
+                    returnedBook.getContent());
+            return returnedBookPojo;
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return new BookPojo();
     }
 
     @Override
-    public Book getBookById(int id){
-        return bookDAO.getBookById(id);
+    public BookPojo getBookById(int id){
+        try {
+            Book returnedBook = bookDAO.getBookById(id);
+            BookPojo returnedBookPojo = new BookPojo(returnedBook.getBook_id(),
+                    returnedBook.getTitle(),
+                    returnedBook.getAuthor(),
+                    returnedBook.getCategory(),
+                    returnedBook.getPublisher(),
+                    returnedBook.getContent());
+            return returnedBookPojo;
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return new BookPojo();
     }
 
     @Override

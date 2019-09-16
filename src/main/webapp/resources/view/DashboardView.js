@@ -20,10 +20,7 @@ app.DashboardView = Backbone.View.extend({
         $("#currentView").empty().append("Cart");
 
         if (app.DashboardView.cartView != null) {
-            var self = app.DashboardView.cartView;
-            self.undelegateEvents();
-            self.$el.removeData().unbind();
-            self.$el.empty();
+            app.DashboardView.cartView.destroy();
         }
         app.DashboardView.cartView = new app.CartView();
     },
@@ -32,11 +29,10 @@ app.DashboardView = Backbone.View.extend({
         debugger;
         $("#currentView").empty().append("Books");
         if (app.DashboardView.libraryView != null) {
-            app.DashboardView.libraryView.render();
+            app.DashboardView.libraryView.destroy();
+            debugger;
         }
-        else {
-            app.DashboardView.libraryView = new app.LibraryView();
-        }
+        app.DashboardView.libraryView = new app.LibraryView();
     },
 
     showAddBookView: function () {

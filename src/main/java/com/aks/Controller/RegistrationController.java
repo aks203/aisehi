@@ -17,6 +17,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controller for handling Registration and Login requests
+ */
 @Controller
 public class RegistrationController {
     @Autowired
@@ -28,6 +31,11 @@ public class RegistrationController {
     @Autowired
     TokenService tokenService;
 
+    /**
+     *
+     * @param user
+     * @return JSON of status and a message
+     */
     @RequestMapping(value = "/login")
     public @ResponseBody Map<String, Object> login(
             @RequestBody UserPojo user){
@@ -43,14 +51,13 @@ public class RegistrationController {
             userDetails.put("status", "Success");
             userDetails.put("msg", "Login successful. Enjoy.");
             try {
-                String token = jwtGenerator.generate(newUser);
+                String token = jwtGenerator.generateToken(newUser);
                 tokenService.saveToken(newUser.getId(), token);
             }catch (Exception ex){
                 userDetails.put("status", "Error");
                 userDetails.put("msg", "Error generating token. Please try after sometime.");
                 return userDetails;
             }
-//            userDetails.put("auth-token", token);
             return userDetails;
         }catch (Exception ex){
             ex.printStackTrace();
@@ -60,19 +67,24 @@ public class RegistrationController {
         }
     }
 
+    /**
+     * @param user
+     * @return JSON of User object, status and a message
+     */
     @RequestMapping(value = "/register", consumes = "application/json")
      public @ResponseBody Map<String, Object> registerNewUser(
-            HttpServletRequest request,
-            @RequestBody UserPojo user,
-            HttpServletResponse response){
+            @RequestBody UserPojo user
+            ){
         Map<String, Object> userDetails = new HashMap<String, Object>();
         try {
-            if (user.getName()== "" || user.getEmail() == "" || user.getPassword() == "" || user.getPassword() == "" || userService.checkEmail(user.getEmail())==false) {
+            if (user.getName()== "" || user.getEmail() == "" || user.getPassword() == "" ||
+                    user.getPassword() == "" || userService.checkEmail(user.getEmail())==false) {
                 userDetails.put("status", "Error");
                 userDetails.put("msg", "\"Error creating user. Please fill all the details correctly..\"");
                 return userDetails;
             }
-            userDetails.put("user", userService.createUser(user.getName(), user.getEmail(), user.getPassword(), user.getLanguage(), user.getRole()));
+            userDetails.put("user", userService.createUser(user.getName(), user.getEmail(),
+                    user.getPassword(), user.getLanguage(), user.getRole()));
             userDetails.put("status", "Success");
             userDetails.put("msg", "User successfully created. Now, you can login.");
             return userDetails;
@@ -90,6 +102,10 @@ public class RegistrationController {
         }
     }
 
+    /**
+     * Loading index.jsp file
+     * @return filename
+     */
     @RequestMapping(value = "/", method=RequestMethod.GET)
     public String home(){
         return "index";

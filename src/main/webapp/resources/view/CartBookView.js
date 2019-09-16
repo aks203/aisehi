@@ -9,7 +9,7 @@ app.CartBookView=Backbone.View.extend({
     },
 
     deleteFromCart: function() {
-        var book_id=this.model.attributes.id;
+        var book_id=this.model.attributes.book_id;
         var self=this;
         $.ajax({
             url: '/api/cart/'+getUserId()+'/'+book_id,
@@ -24,7 +24,7 @@ app.CartBookView=Backbone.View.extend({
                 }
             }
         });
-        this.model.destroy();
+        // this.model.destroy();
         debugger;
     },
 

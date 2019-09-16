@@ -5,7 +5,6 @@ import com.aks.DAO.CartDAO;
 import com.aks.Entity.Book;
 import com.aks.Entity.Cart;
 import com.aks.POJO.BookPojo;
-import com.aks.POJO.CartPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,27 +23,25 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<BookPojo> getCart(Integer user_id) {
-        try {
-            CartPojo cartPojo = new CartPojo();
-            List<Cart> userCarts = cartDAO.getCart(user_id);
-            List<BookPojo> bookPojoList = new ArrayList<>();
-            if (userCarts.size() < 1) {
-                return bookPojoList;
-            }
-            for (Cart cart : userCarts) {
-                Book newBook=bookDAO.getBookById(cart.getBook_id());
-                bookPojoList.add(new BookPojo(newBook.getBook_id(),
-                                                newBook.getTitle(),
-                                                newBook.getAuthor(),
-                                                newBook.getCategory(),
-                                                newBook.getPublisher()));
-            }
+        List<Cart> userCarts = cartDAO.getCart(user_id);
+        List<BookPojo> bookPojoList = new ArrayList<>();
+        if (userCarts.size() < 1) {
             return bookPojoList;
         }
-        catch (Exception ex){
-            ex.printStackTrace();
-            return null;
+        for (Cart cart : userCarts) {
+            try {
+                Book newBook = bookDAO.getBookById(cart.getBook_id());
+                bookPojoList.add(new BookPojo(newBook.getBook_id(),
+                        newBook.getTitle(),
+                        newBook.getAuthor(),
+                        newBook.getCategory(),
+                        newBook.getPublisher(),
+                        newBook.getContent()));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
+        return bookPojoList;
     }
 
     @Override

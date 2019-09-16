@@ -10,7 +10,8 @@ app.BookView=Backbone.View.extend({
     },
 
     addToCart: function(){
-        var book_id=this.model.attributes.id;
+        var book_id=this.model.attributes.book_id;
+        debugger;
         var user_id=getUserId();
         $.ajax({
             url: '/api/cart/add/'+user_id+'/'+book_id,
@@ -25,7 +26,7 @@ app.BookView=Backbone.View.extend({
     },
 
     deleteBook: function() {
-        var id=this.model.attributes.id;
+        var id=this.model.attributes.book_id;
         var self=this;
         $.ajax({
             url: '/api/books/'+id,

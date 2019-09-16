@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     /**
      *
      * @param email
-     * @return
+     * @return true if email is of correct format, else return false
      */
     @Override
     public boolean checkEmail(String email){
@@ -89,7 +89,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteUser(int user_id) {
-        return userDAO.deleteUser(user_id);
+        int i=userDAO.deleteUser(user_id);
+        if(i==1)
+            return true;
+        else
+            return false;
     }
 
     /**

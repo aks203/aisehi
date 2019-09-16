@@ -1,13 +1,11 @@
 package com.aks.DAO;
 
 import com.aks.Entity.Book;
-import com.aks.Entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -30,7 +28,7 @@ public class BookDAOImpl implements BookDAO {
     /**
      *
      * @param book
-     * @return book with id
+     * @return id
      */
     @Override
     public int addBook(Book book){
@@ -38,15 +36,23 @@ public class BookDAOImpl implements BookDAO {
         return (Integer)currentSession.save(book);
     }
 
+    /**
+     * @param id
+     * @return Book
+     */
     @Override
-    public Book getBookById(int id){
-        Session currentSession=sessionFactory.getCurrentSession();
-        Query q=currentSession.createQuery("from Book where id= :id");
+    public Book getBookById(int id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query q = currentSession.createQuery("from Book where book_id= :id");
         q.setParameter("id", id);
-        Book book=(Book)q.uniqueResult();
+        Book book = (Book) q.uniqueResult();
         return book;
     }
 
+    /**
+     * @param id
+     * @return 1 if book is deleted, else 0
+     */
     @Override
     public int deleteBook(Integer id){
         Session currentSession=sessionFactory.getCurrentSession();

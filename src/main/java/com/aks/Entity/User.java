@@ -1,15 +1,12 @@
 package com.aks.Entity;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * User entity class
+ */
 @Entity
 @Table(name = "USER")
 public class User implements Serializable {
@@ -53,9 +50,6 @@ public class User implements Serializable {
 //    @JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")
 //    private Cart cart;
 
-    @Transient
-    private String userMsg;
-
     /**
      * Default Constructor
      */
@@ -94,61 +88,144 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public String getRole() {
-        return role;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
+    /**
+     * Sets new email.
+     *
+     * @param email New value of email.
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public Subscription getSubscription() {
-        return subscription;
-    }
-
+    /**
+     * Sets new subscription.
+     *
+     * @param subscription New value of subscription.
+     */
     public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
     }
 
+    /**
+     * Sets new id.
+     *
+     * @param id New value of id.
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Sets new name.
+     *
+     * @param name New value of name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Gets password.
+     *
+     * @return Value of password.
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Gets id.
+     *
+     * @return Value of id.
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Gets role.
+     *
+     * @return Value of role.
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * Gets name.
+     *
+     * @return Value of name.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets new language.
+     *
+     * @param language New value of language.
+     */
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    /**
+     * Gets subscription.
+     *
+     * @return Value of subscription.
+     */
+    public Subscription getSubscription() {
+        return subscription;
+    }
+
+    /**
+     * Gets language.
+     *
+     * @return Value of language.
+     */
+    public String getLanguage() {
+        return language;
+    }
+
+    /**
+     * Gets email.
+     *
+     * @return Value of email.
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Sets new password.
+     *
+     * @param password New value of password.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * Sets new role.
+     *
+     * @param role New value of role.
+     */
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    /**
+     *
+     * @return User object in String format
+     */
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", language='" + language + '\'' +
+                '}';
+    }
 }

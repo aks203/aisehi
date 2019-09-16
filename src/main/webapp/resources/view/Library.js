@@ -49,6 +49,7 @@ app.LibraryView = Backbone.View.extend({
             },
             wait: true,
             headers: {'user_id' :getUserId()}});
+        debugger;
         this.render();
         this.listenTo( this.collection, 'reset', this.render );
     },
@@ -69,5 +70,13 @@ app.LibraryView = Backbone.View.extend({
             model: item
         });
         this.$el.append( bookView.render().el );
+    },
+
+    destroy: function () {
+        this.undelegateEvents();
+        this.$el.removeData().unbind();
+        debugger;
+        this.$el.empty();
+
     }
 });

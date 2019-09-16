@@ -13,6 +13,9 @@ public class TokenDAOImpl implements TokenDAO {
     @Autowired
     SessionFactory sessionFactory;
 
+    /**
+     * @param token_detail
+     */
     @Override
     public void saveToken(TokenDetail token_detail) {
         Session currentSession=sessionFactory.getCurrentSession();
@@ -22,6 +25,10 @@ public class TokenDAOImpl implements TokenDAO {
         currentSession.save(token_detail);
     }
 
+    /**
+     * @param user_id
+     * @return token if present
+     */
     @Override
     public String getToken(int user_id){
         Session session=sessionFactory.getCurrentSession();

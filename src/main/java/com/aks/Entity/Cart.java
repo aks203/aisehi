@@ -2,6 +2,9 @@ package com.aks.Entity;
 
 import javax.persistence.*;
 
+/**
+ * Cart entity representing book in a cart
+ */
 @Entity
 @Table(name = "CART")
 public class Cart {
@@ -18,7 +21,6 @@ public class Cart {
     private int book_id;
 
     /**
-     *
      * @param user_id
      * @param book_id
      */

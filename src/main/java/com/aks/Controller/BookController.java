@@ -1,6 +1,7 @@
 package com.aks.Controller;
 
 import com.aks.Entity.Book;
+import com.aks.POJO.BookPojo;
 import com.aks.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Rest controller api for books related requests
+ * User id must be passed in header under "user_id" field for api requests
+ *
+ * url             HTTP Method  Operation
+ * /api/books      GET          Get a list of all books
+ * /api/books      POST         Add a new book and return the book with an id attribute added
+ * /api/books/:id  DELETE       Delete the book with id of :id
+ */
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
@@ -15,24 +25,47 @@ public class BookController {
     @Autowired
     BookService bookService;
 
+    /**
+     * @return List of all books
+     */
     @GetMapping()
-    public @ResponseBody List<Book> getBooks(){
+    public @ResponseBody List<BookPojo> getBooks(){
         try {
             return bookService.getBooks();
         }
         catch (Exception ex){
             ex.printStackTrace();
-            return new ArrayList<Book>();
+            return new ArrayList<>();
         }
     }
 
+    /**
+     * Add book to DB
+     * @param bookPojo
+     * @return book with id attribute
+     */
     @PostMapping()
-    public @ResponseBody Book addBook(@RequestBody Book book){
-        return bookService.addBook(book);
+    public @ResponseBody BookPojo addBook(@RequestBody BookPojo bookPojo){
+        try {
+            return bookService.addBook(bookPojo);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return new BookPojo();
+        }
     }
 
+    /**
+     * Delete book by id
+     * @param id
+     * @return Message
+     */
     @DeleteMapping(value = "/{id}")
     public @ResponseBody String deleteBook(@PathVariable("id") Integer id){
-        return bookService.deleteBook(id);
+        try {
+            return bookService.deleteBook(id);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return "Error deleting book. Please try after some time.";
+        }
     }
 }

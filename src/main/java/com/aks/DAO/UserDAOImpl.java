@@ -23,22 +23,33 @@ public class UserDAOImpl implements UserDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
+
+    /**
+     *
+     * @param user
+     */
     public void createUser(User user){
         Session currentSession=sessionFactory.getCurrentSession();
             currentSession.save(user);
     };
 
-    public boolean deleteUser(int user_id){
+    /**
+     *
+     * @param user_id
+     * @return 1 if deleted successfully, else 0
+     */
+    public int deleteUser(int user_id){
         Session currentSession=sessionFactory.getCurrentSession();
         Query q=currentSession.createQuery("delete User where id= :id");
         q.setParameter("id", user_id);
-        int i=q.executeUpdate();
-        if(i==1)
-            return true;
-        else
-            return false;
+        return q.executeUpdate();
     }
 
+    /**
+     *
+     * @param id
+     * @return user by id
+     */
     @Override
     public User getUser(int id){
         //Get the current hibernate session
@@ -49,6 +60,11 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+    /**
+     *
+     * @param email
+     * @return user by email
+     */
     @Override
     public User getUser(String email){
         Session currentSession=sessionFactory.getCurrentSession();
@@ -57,6 +73,11 @@ public class UserDAOImpl implements UserDAO {
         return (User)q.uniqueResult();
     }
 
+    /**
+     *
+     * @param email
+     * @return password by email
+     */
     @Override
     public String getPasswordByEmail(String email){
         Session currentSession=sessionFactory.getCurrentSession();

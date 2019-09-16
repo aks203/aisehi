@@ -22,7 +22,7 @@ public interface UserDAO{
      */
     User getUser(String email);
 
-    boolean deleteUser(int user_id);
+    int deleteUser(int user_id);
 
     String getPasswordByEmail(String email);
 }

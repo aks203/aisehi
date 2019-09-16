@@ -1,8 +1,13 @@
 package com.aks.Entity;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Book entity
+ */
 
 @Entity
 @Table(name = "BOOK")
@@ -21,6 +26,10 @@ public class Book {
     @Column(name = "CATEGORY")
     private String category;
 
+    @Column(name="content")
+    @Lob
+    private Blob content;
+
     @Column(name = "PUBLISHER")
     private String publisher;
 
@@ -29,7 +38,6 @@ public class Book {
     private Order order;
 
     /**
-     *
      * @param title
      * @param author
      * @param category
@@ -43,75 +51,31 @@ public class Book {
     }
 
     /**
+     * @param title
+     * @param author
+     * @param category
+     * @param content
+     * @param publisher
+     */
+    public Book(String title, String author, String category, Blob content, String publisher) {
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.content = content;
+        this.publisher = publisher;
+    }
+
+
+    /**
      * Default Constructor
      */
     public Book() {
     }
 
     /**
-     * Getters and setters
+     *
+     * @return Book object in string format
      */
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public int getBook_id() {
-        return book_id;
-    }
-
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
-    }
-
-//    public Cart getCart() {
-//        return cart;
-//    }
-//
-//    public void setCart(Cart cart) {
-//        this.cart = cart;
-//    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public int getId() {
-        return book_id;
-    }
-
     @Override
     public String toString() {
         return "Book{" +
@@ -122,5 +86,132 @@ public class Book {
                 ", publisher='" + publisher + '\'' +
                 ", order=" + order +
                 '}';
+    }
+
+    /**
+     * Gets publisher.
+     *
+     * @return Value of publisher.
+     */
+    public String getPublisher() {
+        return publisher;
+    }
+
+    /**
+     * Gets title.
+     *
+     * @return Value of title.
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Sets new category.
+     *
+     * @param category New value of category.
+     */
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    /**
+     * Sets new publisher.
+     *
+     * @param publisher New value of publisher.
+     */
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    /**
+     * Gets order.
+     *
+     * @return Value of order.
+     */
+    public Order getOrder() {
+        return order;
+    }
+
+    /**
+     * Sets new book_id.
+     *
+     * @param book_id New value of book_id.
+     */
+    public void setBook_id(int book_id) {
+        this.book_id = book_id;
+    }
+
+    /**
+     * Sets new author.
+     *
+     * @param author New value of author.
+     */
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    /**
+     * Gets category.
+     *
+     * @return Value of category.
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    /**
+     * Gets book_id.
+     *
+     * @return Value of book_id.
+     */
+    public int getBook_id() {
+        return book_id;
+    }
+
+    /**
+     * Sets new order.
+     *
+     * @param order New value of order.
+     */
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    /**
+     * Sets new title.
+     *
+     * @param title New value of title.
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * Gets author.
+     *
+     * @return Value of author.
+     */
+    public String getAuthor() {
+        return author;
+    }
+
+
+    /**
+     * Sets new content.
+     *
+     * @param content New value of content.
+     */
+    public void setContent(Blob content) {
+        this.content = content;
+    }
+
+    /**
+     * Gets content.
+     *
+     * @return Value of content.
+     */
+    public Blob getContent() {
+        return content;
     }
 }
