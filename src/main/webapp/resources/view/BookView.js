@@ -35,10 +35,12 @@ app.BookView=Backbone.View.extend({
             headers: {'user_id' :getUserId()},
             success: function(result) {
                 debugger;
+                self.remove();
                 alert(result);
-                if(result=="Successfully deleted."){
-                    self.remove();
-                }
+            },
+            error: function (response) {
+                debugger;
+                alert(response.responseJSON.message);
             }
         });
         this.model.destroy();

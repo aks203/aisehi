@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
+/**
+ * marks this class as a Data Access Object and
+ * translates all unchecked exceptions (thrown from DAO methods) into Spring DataAccessException
+ */
 @Repository
 public class BookDAOImpl implements BookDAO {
     @Autowired

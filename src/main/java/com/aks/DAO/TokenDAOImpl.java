@@ -15,14 +15,15 @@ public class TokenDAOImpl implements TokenDAO {
 
     /**
      * @param token_detail
+     * return id of token
      */
     @Override
-    public void saveToken(TokenDetail token_detail) {
+    public int saveToken(TokenDetail token_detail) {
         Session currentSession=sessionFactory.getCurrentSession();
         Query q=currentSession.createQuery("delete from TokenDetail where user_id= :id");
         q.setParameter("id", token_detail.getUser_id());
         q.executeUpdate();
-        currentSession.save(token_detail);
+        return (Integer)currentSession.save(token_detail);
     }
 
     /**

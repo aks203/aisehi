@@ -1,11 +1,24 @@
 var app=app||{};
 
+function showView(view){
+        if (this.currentView){
+            this.currentView.close();
+        }
+        debugger;
+        this.currentView = view;
+        this.currentView.render();
+        // $("#mainContent").html(this.currentView.el);
+    }
+
 $(document).ready(function () {
+    Backbone.View.prototype.close = function(){
+        this.remove();
+        this.unbind();
+    }
     if(JSON.parse(sessionStorage.getItem("response"))==null) {
-        new app.signupView({model: new app.User});
+        showView(new app.signupView({model: new app.User}));
     }
     else {
-        console.log(JSON.parse(sessionStorage.getItem("response")));
         app.role=JSON.parse(sessionStorage.getItem("response")).user.role;
         debugger;
         showDashboard(JSON.parse(sessionStorage.getItem("response")));

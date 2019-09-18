@@ -5,7 +5,7 @@ import com.aks.POJO.TokenPojo;
 
 public interface TokenDAO {
 
-    void saveToken(TokenDetail tokenDetail);
+    int saveToken(TokenDetail tokenDetail);
 
     String getToken(int user_id);
 }

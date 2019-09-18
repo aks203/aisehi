@@ -15,10 +15,10 @@ public class TokenServiceImpl implements TokenService{
     TokenDAO tokenDao;
 
     @Override
-    public void saveToken(int user_id, String token) {
+    public int saveToken(int user_id, String token) {
         TokenPojo tokenPojo=new TokenPojo(user_id, token);
         TokenDetail tokenDetail=new TokenDetail(tokenPojo.getUser_id(), tokenPojo.getToken());
-        tokenDao.saveToken(tokenDetail);
+        return tokenDao.saveToken(tokenDetail);
     }
 
     @Override

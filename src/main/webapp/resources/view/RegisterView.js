@@ -13,7 +13,7 @@ app.signupView = Backbone.View.extend({
 
     initialize: function () {
         console.log(this.model);
-        this.render();
+        // this.render();
     },
 
     showLoginForm:function(e) {

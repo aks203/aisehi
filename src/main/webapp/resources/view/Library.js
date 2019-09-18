@@ -23,8 +23,11 @@ app.LibraryView = Backbone.View.extend({
                 success: function (response){
                     alert("Book added successfully.")
                 },
-                error:function (response) {
-                console.log(response);
+                error:function (model, error, response) {
+                if(response.status==500){
+                    alert(response.responseJSON.message);
+                    return;
+                }
                 logout();
                 }
             } );

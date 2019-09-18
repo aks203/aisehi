@@ -29,7 +29,7 @@ app.DashboardView = Backbone.View.extend({
                     }
                         debugger;
                 });
-            }, 1500);
+            }, 1000);
         },
 
     destroy: function () {
@@ -78,6 +78,9 @@ app.DashboardView = Backbone.View.extend({
     render: function () {
         this.$el.html(this.template(this.model.toJSON()));
         componentHandler.upgradeDom();
+        // Enables us to reuse the view as a sub-view.
+        // Can also be used to pre-render the view prior to rendering.
+        //Like in the library render function.
         return this;
     }
 })

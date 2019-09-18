@@ -1,6 +1,8 @@
 package com.aks.Controller;
 
 import com.aks.Entity.Book;
+import com.aks.Exceptions.CustomException;
+import com.aks.Exceptions.CustomSaveException;
 import com.aks.POJO.BookPojo;
 import com.aks.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +50,9 @@ public class BookController {
     public @ResponseBody BookPojo addBook(@RequestBody BookPojo bookPojo){
         try {
             return bookService.addBook(bookPojo);
-        }catch (Exception ex){
-            ex.printStackTrace();
-            return new BookPojo();
+        }
+        catch (CustomException ex){
+            throw new CustomSaveException("Book can't be saved at this time. Please try again later.");
         }
     }
 
@@ -61,11 +63,9 @@ public class BookController {
      */
     @DeleteMapping(value = "/{id}")
     public @ResponseBody String deleteBook(@PathVariable("id") Integer id){
-        try {
-            return bookService.deleteBook(id);
-        }catch (Exception ex){
-            ex.printStackTrace();
-            return "Error deleting book. Please try after some time.";
+        if(!(bookService.deleteBook(id) >0)){
+            throw new CustomException("Unable to delete book.");
         }
+        return "Book deleted successfully.";
     }
 }

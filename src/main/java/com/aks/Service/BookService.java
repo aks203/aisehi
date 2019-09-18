@@ -16,5 +16,5 @@ public interface BookService {
 
     BookPojo getBookById(int id);
 
-    String deleteBook(Integer id);
+    int deleteBook(Integer id);
 }

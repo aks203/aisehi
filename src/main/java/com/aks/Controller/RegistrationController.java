@@ -1,11 +1,15 @@
 package com.aks.Controller;
 
+import com.aks.Exceptions.CustomException;
+import com.aks.POJO.CustomExceptionPojo;
 import com.aks.POJO.UserPojo;
 import com.aks.Service.TokenService;
 import com.aks.Service.UserService;
 import com.aks.security.JwtUtil;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,31 +39,16 @@ public class RegistrationController {
     public @ResponseBody Map<String, Object> login(
             @RequestBody UserPojo user){
         Map<String, Object> userDetails = new HashMap<String, Object>();
-        try {
             UserPojo newUser=userService.getUser(user.getEmail(), user.getPassword());
             if(newUser==null){
-                userDetails.put("status", "Error");
-                userDetails.put("msg", "Login unsuccessful! Please check details.");
-                return userDetails;
+                throw new CustomException("User Not found. Please check details.");
             }
             userDetails.put("user", newUser);
             userDetails.put("status", "Success");
             userDetails.put("msg", "Login successful. Enjoy.");
-            try {
-                String token = jwtUtil.generateToken(newUser);
-                tokenService.saveToken(newUser.getId(), token);
-            }catch (Exception ex){
-                userDetails.put("status", "Error");
-                userDetails.put("msg", "Error generating token. Please try after sometime.");
-                return userDetails;
-            }
+            String token = jwtUtil.generateToken(newUser);
+            tokenService.saveToken(newUser.getId(), token);
             return userDetails;
-        }catch (Exception ex){
-            ex.printStackTrace();
-            userDetails.put("status", "Error");
-            userDetails.put("msg", "\"Error creating user. Please fill all the details correctly..\"");
-            return userDetails;
-        }
     }
 
     /**
