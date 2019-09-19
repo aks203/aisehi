@@ -40,11 +40,11 @@ app.DashboardView = Backbone.View.extend({
 
     showCart: function () {
         $("#currentView").empty().append("Cart");
-
-        if (app.DashboardView.cartView != null) {
-            app.DashboardView.cartView.destroy();
-        }
-        app.DashboardView.cartView = new app.CartView();
+        showView(new app.CartView());
+        // if (app.DashboardView.cartView != null) {
+        //     app.DashboardView.cartView.destroy();
+        // }
+        // app.DashboardView.cartView = new app.CartView();
     },
 
     showLibrary: function () {
@@ -61,7 +61,7 @@ app.DashboardView = Backbone.View.extend({
         debugger;
         $("#currentView").empty().append("Add new Book");
         debugger;
-        new app.AddBookView();
+        showView(new app.AddBookView());
     },
 
     template: _.template($('#headerTemplate').html(), {
@@ -71,7 +71,7 @@ app.DashboardView = Backbone.View.extend({
 
     initialize: function () {
         console.log("Dashboard initialized...");
-        console.log("Header rendered...")
+        console.log("Header rendered...");
         this.render();
         this.showLibrary();
     },
@@ -83,4 +83,4 @@ app.DashboardView = Backbone.View.extend({
         //Like in the library render function.
         return this;
     }
-})
+});

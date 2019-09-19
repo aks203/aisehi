@@ -2,7 +2,6 @@ package com.aks.Service;
 
 import com.aks.Entity.PLAN;
 import com.aks.Entity.Subscription;
-import com.aks.Entity.User;
 
 import java.time.LocalDate;
 

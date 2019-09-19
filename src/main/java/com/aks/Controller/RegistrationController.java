@@ -1,15 +1,12 @@
 package com.aks.Controller;
 
 import com.aks.Exceptions.CustomException;
-import com.aks.POJO.CustomExceptionPojo;
 import com.aks.POJO.UserPojo;
 import com.aks.Service.TokenService;
 import com.aks.Service.UserService;
 import com.aks.security.JwtUtil;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,7 +59,7 @@ public class RegistrationController {
         Map<String, Object> userDetails = new HashMap<String, Object>();
         try {
             if (user.getName()== "" || user.getEmail() == "" || user.getPassword() == "" ||
-                    user.getPassword() == "" || userService.checkEmail(user.getEmail())==false) {
+                     !userService.checkEmail(user.getEmail())) {
                 userDetails.put("status", "Error");
                 userDetails.put("msg", "\"Error creating user. Please fill all the details correctly..\"");
                 return userDetails;

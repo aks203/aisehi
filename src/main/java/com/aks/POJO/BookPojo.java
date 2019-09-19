@@ -2,8 +2,6 @@ package com.aks.POJO;
 
 
 import java.sql.Blob;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BookPojo {
 

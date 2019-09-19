@@ -6,14 +6,13 @@ app.AddBookView = Backbone.View.extend({
 
     initialize:function(){
         debugger;
-        this.render();
+        // this.render();
     },
     render: function() {
         debugger;
         this.$el.html(this.template());
         return this;
-    },
-
+    }
 });
 
 

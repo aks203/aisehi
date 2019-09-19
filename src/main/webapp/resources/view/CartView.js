@@ -6,7 +6,7 @@ app.CartView = Backbone.View.extend({
     events:{
     },
 
-    initialize: function( initialBooks ) {
+    initialize: function( ) {
         this.collection = new app.CartCollection();
         // The models are fetched asynchronously after the page is rendered.
         // When the fetch completes, Backbone fires the reset event,
@@ -27,14 +27,14 @@ app.CartView = Backbone.View.extend({
             },
             wait: true,
             headers: {'user_id' :getUserId()}});
-        this.render();
+        // this.render();
         this.listenTo( this.collection, 'reset', this.render );
     },
 
     // render library by rendering each book in its collection
     render: function() {
         $("#content").empty();
-        console.log("rendering cart view...")
+        console.log("rendering cart view...");
         this.collection.each(function( item ) {
             this.renderBook( item );
         }, this );

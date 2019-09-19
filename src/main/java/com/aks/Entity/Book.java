@@ -2,8 +2,6 @@ package com.aks.Entity;
 
 import javax.persistence.*;
 import java.sql.Blob;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Book entity

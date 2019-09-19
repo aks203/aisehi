@@ -16,7 +16,7 @@ app.LoginView = Backbone.View.extend({
     },
 
 
-    onLoginFormSubmit: function (e) {
+    onLoginFormSubmit: function () {
         this.model.set({
             email: $(".email").val(),
             password: $(".password").val()

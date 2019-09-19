@@ -35,7 +35,6 @@ public class TokenDAOImpl implements TokenDAO {
         Session session=sessionFactory.getCurrentSession();
         Query q=session.createQuery("select token from TokenDetail where user_id= :id");
         q.setParameter("id", user_id);
-        String token=(String)q.uniqueResult();
-        return token;
+        return (String)q.uniqueResult();
     }
 }

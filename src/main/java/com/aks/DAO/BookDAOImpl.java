@@ -25,8 +25,7 @@ public class BookDAOImpl implements BookDAO {
     public List<Book> getBooks(){
         Session currentSession=sessionFactory.getCurrentSession();
         Query q=currentSession.createQuery("from Book");
-        List<Book> books=(List<Book>)q.getResultList();
-        return books;
+        return (List<Book>)q.getResultList();
     }
 
     /**
@@ -49,8 +48,7 @@ public class BookDAOImpl implements BookDAO {
         Session currentSession = sessionFactory.getCurrentSession();
         Query q = currentSession.createQuery("from Book where book_id= :id");
         q.setParameter("id", id);
-        Book book = (Book) q.uniqueResult();
-        return book;
+        return (Book) q.uniqueResult();
     }
 
     /**

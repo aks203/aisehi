@@ -1,6 +1,5 @@
 package com.aks.Controller;
 
-import com.aks.Entity.Book;
 import com.aks.Exceptions.CustomException;
 import com.aks.Exceptions.CustomSaveException;
 import com.aks.POJO.BookPojo;
@@ -37,7 +36,7 @@ public class BookController {
         }
         catch (Exception ex){
             ex.printStackTrace();
-            return new ArrayList<>();
+            return new ArrayList<BookPojo>();
         }
     }
 

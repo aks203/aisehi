@@ -1,9 +1,6 @@
 package com.aks.Entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "PURCHASE")

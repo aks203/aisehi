@@ -1,14 +1,12 @@
 package com.aks.DAO;
 
 import com.aks.Entity.Cart;
-import com.aks.POJO.BookPojo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -27,8 +25,7 @@ public class CartDAOImpl implements CartDAO {
         Session currentSession=sessionFactory.getCurrentSession();
         Query q=currentSession.createQuery("from Cart where user_id= :user_id");
         q.setParameter("user_id", user_id);
-        List<Cart> userCarts=(List<Cart>)q.getResultList();
-        return userCarts;
+        return (List<Cart>)q.getResultList();
     }
 
     /**

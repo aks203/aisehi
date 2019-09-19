@@ -13,15 +13,17 @@ app.signupView = Backbone.View.extend({
 
     initialize: function () {
         console.log(this.model);
-        // this.render();
+        this.render();
     },
 
     showLoginForm:function(e) {
+        e.preventDefault();
         debugger;
-        app.loginView=new app.LoginView({model: new app.Auth()})
+        app.loginView=new app.LoginView({model: new app.Auth()});
     },
 
     showRegisterForm: function(e){
+        e.preventDefault();
         debugger;
       this.render();
     },
@@ -32,7 +34,6 @@ app.signupView = Backbone.View.extend({
             name: $("#name").val(), email: $("#email").val(),
             password: $("#password").val(), language: $("#language").val(),role: $("#role:checked").val()
         });
-        var o=this;
         this.model.save({
             type: "POST",
             contentType: "application/json"

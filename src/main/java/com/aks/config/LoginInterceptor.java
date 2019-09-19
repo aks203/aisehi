@@ -53,7 +53,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                     return true;
             }
             catch (EntityNotFoundException notFoundExc){
-
+                return false;
             }
         }
         return false;

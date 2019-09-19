@@ -36,7 +36,7 @@ app.LibraryView = Backbone.View.extend({
         frm.reset();
     },
 
-    initialize: function( initialBooks ) {
+    initialize: function( ) {
         this.collection = new app.BookCollection();
         // The models are fetched asynchronously after the page is rendered.
         // When the fetch completes, Backbone fires the reset event,
@@ -60,7 +60,7 @@ app.LibraryView = Backbone.View.extend({
     // render library by rendering each book in its collection
     render: function() {
         $("#content").empty();
-        console.log("rendering library view...")
+        console.log("rendering library view...");
         this.collection.each(function( item ) {
             this.renderBook( item );
         }, this );

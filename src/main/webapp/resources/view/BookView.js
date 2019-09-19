@@ -58,4 +58,4 @@ app.BookView=Backbone.View.extend({
         this.$el.html(this.template(this.model.attributes));
         return this;
     }
-})
+});

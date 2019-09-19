@@ -1,11 +1,7 @@
 package com.aks.Service;
 
-import com.aks.Entity.Order;
-import com.aks.Entity.Subscription;
 import com.aks.Entity.User;
 import com.aks.POJO.UserPojo;
-
-import java.util.List;
 
 public interface UserService {
     boolean checkEmail(String email);

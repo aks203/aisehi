@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "SUBSCRIPTION")
-public class Subscription {
+public class Subscription  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SUBS_ID", nullable = false, unique = true)

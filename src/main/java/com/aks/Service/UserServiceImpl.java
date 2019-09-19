@@ -3,9 +3,7 @@ package com.aks.Service;
 import com.aks.DAO.UserDAO;
 import com.aks.Entity.User;
 import com.aks.POJO.UserPojo;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +44,7 @@ public class UserServiceImpl implements UserService {
             if (email == null)
                 return false;
             return pat.matcher(email).matches();
-    };
+    }
 
     /**
      *
@@ -57,7 +55,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserPojo getUser(String email, String password) {
-        if(checkEmail(email)==false){
+        if(!checkEmail(email)){
             return null;
         }
         if (passwordEncoder.matches(password, userDAO.getPasswordByEmail(email))) {
@@ -90,10 +88,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteUser(int user_id) {
         int i=userDAO.deleteUser(user_id);
-        if(i==1)
-            return true;
-        else
-            return false;
+        return i==1;
     }
 
     /**
