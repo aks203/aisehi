@@ -15,8 +15,6 @@ public class BookPojo {
 
     private String publisher;
 
-    private OrderPojo order;
-
     private Blob content;
 
     /**
@@ -99,7 +97,6 @@ public class BookPojo {
                 ", author='" + author + '\'' +
                 ", category='" + category + '\'' +
                 ", publisher='" + publisher + '\'' +
-                ", order=" + order +
                 '}';
     }
 
@@ -121,14 +118,6 @@ public class BookPojo {
         return book_id;
     }
 
-    /**
-     * Sets new order.
-     *
-     * @param order New value of order.
-     */
-    public void setOrder(OrderPojo order) {
-        this.order = order;
-    }
 
     /**
      * Sets new title.
@@ -158,14 +147,6 @@ public class BookPojo {
         this.category = category;
     }
 
-    /**
-     * Gets order.
-     *
-     * @return Value of order.
-     */
-    public OrderPojo getOrder() {
-        return order;
-    }
 
     /**
      * Sets new publisher.

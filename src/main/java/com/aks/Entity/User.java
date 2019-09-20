@@ -35,41 +35,11 @@ public class User implements Serializable {
     @Column(name = "ROLE")
     private String role;
 
-//    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
-//    //Lazy loading problem while rendering JSON in Backbone
-//    //Thus, used @JsonIgnore.
-//    @JsonIgnore
-//    private List<Order> orders=new ArrayList<Order>();
-
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "SUBS_ID", referencedColumnName = "SUBS_ID")
-    private Subscription subscription;
-
-//    @JsonIgnore
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")
-//    private Cart cart;
 
     /**
      * Default Constructor
      */
     public User() {
-    }
-
-    /**
-     *
-     * @param name
-     * @param email
-     * @param password
-     * @param language
-     * @param subscription
-     */
-    public User(String name, String email, String password, String language, Subscription subscription) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.language = language;
-        this.subscription = subscription;
     }
 
     /**
@@ -96,15 +66,6 @@ public class User implements Serializable {
      */
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    /**
-     * Sets new subscription.
-     *
-     * @param subscription New value of subscription.
-     */
-    public void setSubscription(Subscription subscription) {
-        this.subscription = subscription;
     }
 
     /**
@@ -168,15 +129,6 @@ public class User implements Serializable {
      */
     public void setLanguage(String language) {
         this.language = language;
-    }
-
-    /**
-     * Gets subscription.
-     *
-     * @return Value of subscription.
-     */
-    public Subscription getSubscription() {
-        return subscription;
     }
 
     /**

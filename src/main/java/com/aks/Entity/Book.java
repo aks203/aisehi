@@ -31,10 +31,6 @@ public class Book {
     @Column(name = "PUBLISHER")
     private String publisher;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")
-    private Order order;
-
     /**
      * @param title
      * @param author
@@ -82,7 +78,6 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", category='" + category + '\'' +
                 ", publisher='" + publisher + '\'' +
-                ", order=" + order +
                 '}';
     }
 
@@ -122,14 +117,6 @@ public class Book {
         this.publisher = publisher;
     }
 
-    /**
-     * Gets order.
-     *
-     * @return Value of order.
-     */
-    public Order getOrder() {
-        return order;
-    }
 
     /**
      * Sets new book_id.
@@ -167,14 +154,6 @@ public class Book {
         return book_id;
     }
 
-    /**
-     * Sets new order.
-     *
-     * @param order New value of order.
-     */
-    public void setOrder(Order order) {
-        this.order = order;
-    }
 
     /**
      * Sets new title.
