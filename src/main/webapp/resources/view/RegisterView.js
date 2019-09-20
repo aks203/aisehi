@@ -42,8 +42,7 @@ app.signupView = Backbone.View.extend({
                 console.log(response.msg);
             },
             error: function (model, response) {
-                console.log('error! ' + response);
-                $("#regMsg").html("Error creating user. Please try again..")
+                $("#regMsg").html(response.responseJSON.message);
             }, wait: true});
     },
 

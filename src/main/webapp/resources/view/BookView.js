@@ -21,6 +21,12 @@ app.BookView=Backbone.View.extend({
             success: function(result) {
                 debugger;
                 alert(result);
+            },
+            error: function (response) {
+                debugger;
+                if(response.status==401)
+                    return logout();
+                alert(response.responseJSON.message);
             }
         });
     },
@@ -40,6 +46,8 @@ app.BookView=Backbone.View.extend({
             },
             error: function (response) {
                 debugger;
+                if(response.status==401)
+                    return logout();
                 alert(response.responseJSON.message);
             }
         });

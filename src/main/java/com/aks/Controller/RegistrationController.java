@@ -1,13 +1,17 @@
 package com.aks.Controller;
 
-import com.aks.Exceptions.CustomException;
+import com.aks.Exceptions.BadRequestException;
+import com.aks.Exceptions.CustomNotFoundException;
+import com.aks.Exceptions.DatabaseDownException;
 import com.aks.POJO.UserPojo;
 import com.aks.Service.TokenService;
 import com.aks.Service.UserService;
 import com.aks.security.JwtUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.CannotCreateTransactionException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -34,11 +38,12 @@ public class RegistrationController {
      */
     @RequestMapping(value = "/login")
     public @ResponseBody Map<String, Object> login(
-            @RequestBody UserPojo user){
+            @RequestBody UserPojo user) {
         Map<String, Object> userDetails = new HashMap<String, Object>();
-            UserPojo newUser=userService.getUser(user.getEmail(), user.getPassword());
-            if(newUser==null){
-                throw new CustomException("User Not found. Please check details.");
+        try {
+            UserPojo newUser = userService.getUser(user.getEmail(), user.getPassword());
+            if (newUser == null) {
+                throw new CustomNotFoundException("User Not found. Please check details.");
             }
             userDetails.put("user", newUser);
             userDetails.put("status", "Success");
@@ -46,7 +51,11 @@ public class RegistrationController {
             String token = jwtUtil.generateToken(newUser);
             tokenService.saveToken(newUser.getId(), token);
             return userDetails;
+        } catch (HibernateException | CannotCreateTransactionException dbException) {
+            throw new DatabaseDownException("Database error. Could not connect at this time.");
+        }
     }
+
 
     /**
      * @param user
@@ -60,9 +69,10 @@ public class RegistrationController {
         try {
             if (user.getName()== "" || user.getEmail() == "" || user.getPassword() == "" ||
                      !userService.checkEmail(user.getEmail())) {
-                userDetails.put("status", "Error");
-                userDetails.put("msg", "\"Error creating user. Please fill all the details correctly..\"");
-                return userDetails;
+                throw new BadRequestException("Error creating user. Please fill all the details correctly.");
+//                userDetails.put("status", "Error");
+//                userDetails.put("msg", "\"Error creating user. Please fill all the details correctly..\"");
+//                return userDetails;
             }
             userDetails.put("user", userService.createUser(user.getName(), user.getEmail(),
                     user.getPassword(), user.getLanguage(), user.getRole()));
@@ -76,10 +86,8 @@ public class RegistrationController {
             userDetails.put("msg", "Duplicate entry for this user. Please correct details.");
             return userDetails;
         }
-        catch (Exception ex) {
-            userDetails.put("status", "Error");
-            userDetails.put("msg", "Error creating user. Please correct details.");
-            return userDetails;
+        catch (HibernateException | CannotCreateTransactionException dbException) {
+            throw new DatabaseDownException("Database error. Could not connect at this time.");
         }
     }
 

@@ -4,7 +4,7 @@ import com.aks.DAO.BookDAO;
 import com.aks.DAO.CartDAO;
 import com.aks.Entity.Book;
 import com.aks.Entity.Cart;
-import com.aks.Exceptions.CustomSaveException;
+import com.aks.Exceptions.CustomGenericException;
 import com.aks.POJO.BookPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class CartServiceImpl implements CartService {
             try {
                 Book newBook = bookDAO.getBookById(cart.getBook_id());
                 if(newBook==null){
-                    throw new CustomSaveException("Error getting book from cart.");
+                    throw new CustomGenericException("Error getting book from cart.");
                 }
                 bookPojoList.add(new BookPojo(newBook.getBook_id(),
                         newBook.getTitle(),

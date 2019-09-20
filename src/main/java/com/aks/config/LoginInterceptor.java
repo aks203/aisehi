@@ -43,6 +43,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 String token=tokenService.getToken(user_id);
                 boolean isExpired= jwtUtil.isTokenExpired(token);
                 if (isExpired){
+                    response.setHeader("msg", "session invalid");
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                     return false;
                 }
                 if(token==null){
@@ -53,9 +55,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                     return true;
             }
             catch (EntityNotFoundException notFoundExc){
+                response.setHeader("msg", "session invalid");
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 return false;
             }
         }
+        response.setHeader("msg", "session invalid");
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         return false;
     }
 }

@@ -1,8 +1,14 @@
 package com.aks.Controller;
 
+import com.aks.Entity.Cart;
+import com.aks.Exceptions.CustomGenericException;
+import com.aks.Exceptions.CustomNotFoundException;
+import com.aks.Exceptions.DatabaseDownException;
 import com.aks.POJO.BookPojo;
 import com.aks.Service.CartService;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.CannotCreateTransactionException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -34,9 +40,11 @@ public class CartController {
         try {
             return cartService.getCart(user_id);
         }
+        catch (HibernateException | CannotCreateTransactionException dbException) {
+            throw new DatabaseDownException("Database error. Could not connect at this time.");
+        }
         catch (Exception ex){
-            ex.printStackTrace();
-            return new ArrayList<>();
+            throw new CustomGenericException("Could not retrive cart at this time. Please try again later.");
         }
     }
 
@@ -53,9 +61,11 @@ public class CartController {
         try {
             return cartService.addBook(user_id, book_id);
         }
+        catch (HibernateException | CannotCreateTransactionException dbException) {
+            throw new DatabaseDownException("Database error. Could not connect at this time.");
+        }
         catch (Exception ex){
-            ex.printStackTrace();
-            return "Error adding book to cart. Please try after some time.";
+            throw new CustomGenericException("Could not add book to cart at this time. Please try again later.");
         }
     }
 
@@ -72,9 +82,35 @@ public class CartController {
         try {
             return cartService.deleteBook(user_id, book_id);
         }
+        catch (HibernateException | CannotCreateTransactionException dbException) {
+            throw new DatabaseDownException("Database error. Could not connect at this time.");
+        }
         catch (Exception ex){
-            ex.printStackTrace();
-            return "Error deleting book from cart. Please try after sometime.";
+            throw new CustomGenericException("Error deleting book from cart. Please try after sometime.");
         }
     }
+
+//    @RequestMapping("/checkout/{user_id}")
+//    public @ResponseBody
+//    String checkout(@PathVariable("user_id") Integer user_id){
+//        try{
+//            List<BookPojo> cart = cartService.getCart(user_id);
+//            if (cart.size() == 0) {
+//                return "Cart empty. Please add some books to checkout.";
+//            }
+//            List<BookPojo> currBooks =new ArrayList<>();
+//            if (currBooks.size() + cart.size() > 10) {
+//                return "Maximum 10 books can be issued at a time. Must return a book or remove from cart to issue new.";
+//            }
+//
+//
+//            return "Successfully checked out. Have a great time reading.";
+//        }
+//        catch (HibernateException | CannotCreateTransactionException dbException) {
+//            throw new DatabaseDownException("Database error. Could not connect at this time.");
+//        }
+//        catch (Exception ex){
+//            throw new CustomGenericException("Error deleting book from cart. Please try after sometime.");
+//        }
+//    }
 }

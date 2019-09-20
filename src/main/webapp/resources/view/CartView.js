@@ -13,20 +13,20 @@ app.CartView = Backbone.View.extend({
         // as requested by the reset: true option, and our listener re-renders the view.
         this.collection.fetch({url: 'api/cart/'+getUserId(),
             reset: true,
-            success: function (response) {
+            success: function (model, response) {
                 if (response.length==0){
                     alert("Cart Empty. Please add some books.");
                 }
-                console.log(response.toJSON());
-                debugger;
             },
-            error: function (response) {
-                console.log(response.toJSON());
+            error: function (model, response) {
                 debugger;
-                return logout();
+                if(response.status==401)
+                    return logout();
+                alert(response.responseJSON.message);
             },
             wait: true,
-            headers: {'user_id' :getUserId()}});
+            headers: {'user_id' :getUserId()}
+        });
         // this.render();
         this.listenTo( this.collection, 'reset', this.render );
     },

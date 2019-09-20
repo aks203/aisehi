@@ -42,8 +42,12 @@ function getUserId() {
         return null;
 }
 
-function logout() {
-    alert("Logging you out.");
+function logout(txt) {
+    // txt=txt+'See you &lt del &gt never &lt /del &gt again.';
+    if(txt!=null)
+        alert(txt);
+    else
+        alert("Invalid session! Logging you out..");
     app.dashboardView.destroy();
     sessionStorage.clear();
     // app.loginView=null;

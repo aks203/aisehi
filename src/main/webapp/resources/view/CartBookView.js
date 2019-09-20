@@ -17,11 +17,16 @@ app.CartBookView=Backbone.View.extend({
             wait: true,
             headers: {'user_id' :getUserId()},
             success: function(result) {
-                debugger;
                 alert(result);
                 if(result=="Successfully deleted."){
                     self.remove();
                 }
+            },
+            error: function (response) {
+                debugger;
+                if(response.status==401)
+                    return logout();
+                alert(response.responseJSON.message);
             }
         });
         // this.model.destroy();

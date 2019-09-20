@@ -1,10 +1,13 @@
 package com.aks.Controller;
 
-import com.aks.Exceptions.CustomException;
-import com.aks.Exceptions.CustomSaveException;
+import com.aks.Exceptions.CustomNotFoundException;
+import com.aks.Exceptions.CustomGenericException;
+import com.aks.Exceptions.DatabaseDownException;
 import com.aks.POJO.BookPojo;
 import com.aks.Service.BookService;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.CannotCreateTransactionException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -34,9 +37,11 @@ public class BookController {
         try {
             return bookService.getBooks();
         }
+        catch (HibernateException | CannotCreateTransactionException dbException) {
+            throw new DatabaseDownException("Database error. Could not connect at this time.");
+        }
         catch (Exception ex){
-            ex.printStackTrace();
-            return new ArrayList<BookPojo>();
+            throw new CustomGenericException("Unable to retrive books at this time. Please try again later.");
         }
     }
 
@@ -50,8 +55,11 @@ public class BookController {
         try {
             return bookService.addBook(bookPojo);
         }
-        catch (CustomException ex){
-            throw new CustomSaveException("Book can't be saved at this time. Please try again later.");
+        catch (HibernateException | CannotCreateTransactionException dbException) {
+            throw new DatabaseDownException("Database error. Could not connect at this time.");
+        }
+        catch (Exception ex){
+            throw new CustomGenericException("Book can't be saved at this time. Please try again later.");
         }
     }
 
@@ -63,7 +71,7 @@ public class BookController {
     @DeleteMapping(value = "/{id}")
     public @ResponseBody String deleteBook(@PathVariable("id") Integer id){
         if(!(bookService.deleteBook(id) >0)){
-            throw new CustomException("Unable to delete book.");
+            throw new CustomNotFoundException("Unable to delete book.");
         }
         return "Book deleted successfully.";
     }

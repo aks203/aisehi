@@ -1,4 +1,4 @@
-package com.aks;
+package com.aks.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

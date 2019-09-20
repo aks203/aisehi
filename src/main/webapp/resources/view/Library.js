@@ -23,12 +23,11 @@ app.LibraryView = Backbone.View.extend({
                 success: function (response){
                     alert("Book added successfully.")
                 },
-                error:function (model, error, response) {
-                if(response.status==500){
+                error: function (model, response) {
+                    debugger;
+                    if(response.status==401)
+                        return logout();
                     alert(response.responseJSON.message);
-                    return;
-                }
-                logout();
                 }
             } );
         debugger;
@@ -43,12 +42,14 @@ app.LibraryView = Backbone.View.extend({
         // as requested by the reset: true option, and our listener re-renders the view.
         this.collection.fetch({reset: true,
             success: function (response) {
-               console.log(response.toJSON());
-               debugger;
+            if(!response.length)
+                alert("No book available in library now. Please visit later.");
             },
-            error: function (response) {
-                console.log(response.toJSON());
-                return logout();
+            error: function (model, response) {
+                debugger;
+                if(response.status==401)
+                    return logout();
+                alert(response.responseJSON.message);
             },
             wait: true,
             headers: {'user_id' :getUserId()}});

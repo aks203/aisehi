@@ -2,7 +2,7 @@ package com.aks.Service;
 
 import com.aks.DAO.BookDAO;
 import com.aks.Entity.Book;
-import com.aks.Exceptions.CustomException;
+import com.aks.Exceptions.CustomNotFoundException;
 import com.aks.POJO.BookPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,7 +53,7 @@ public class BookServiceImpl implements BookService {
     public BookPojo getBookById(int id){
             Book returnedBook = bookDAO.getBookById(id);
             if(returnedBook==null) {
-                throw new CustomException("Book not found.");
+                throw new CustomNotFoundException("Book not found.");
             }
         return new BookPojo(returnedBook.getBook_id(),
                 returnedBook.getTitle(),
