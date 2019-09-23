@@ -43,12 +43,9 @@ body {
     line-height: 0;
 }
 
-
-
-
 /*CSS for Book View in dashboard and cart*/
 
-.cartItem {
+.cartItem, .userItem  {
     outline: 1px solid #aaa;
     width: 800px;
     height: 150px;
@@ -57,7 +54,7 @@ body {
     margin: 20px;
 }
 
-.bookItem span, .cartItem span{
+.bookItem span, .cartItem span, .userItem span{
     opacity: 0.5;
 }
 
@@ -70,19 +67,19 @@ body {
      margin: 20px;
  }
 
-.bookItem img, .cartItem img{
+.bookItem img, .cartItem img, .userItem img{
     float: left;
     margin: 10px;
 
 }
 
- .bookItem ul, .cartItem ul{
+ .bookItem ul, .cartItem ul, .userItem ul{
     list-style-type: none;
     margin-bottom: 0;
     color: black;
 }
 
-.bookItem button, .cartItem button {
+.bookItem button, .cartItem button, .userItem button {
     float: right;
     margin: 10px;
 }

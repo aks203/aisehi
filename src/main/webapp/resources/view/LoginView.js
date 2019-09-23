@@ -6,13 +6,21 @@ app.LoginView = Backbone.View.extend({
     template: _.template($('#login-template').html(), {interpolate: /\<\@\=(.+?)\@\>/gim}),
 
     events: {
-        'click #login-btn': 'onLoginFormSubmit'
+        'click #login-btn': 'onLoginFormSubmit',
+        'click #showRegister': 'showRegisterForm'
         // 'click #showLogin': 'showLoginForm',
     },
 
     initialize: function () {
         console.log("Login view initialized...");
         this.render();
+    },
+
+    showRegisterForm: function(e){
+        e.preventDefault();
+        debugger;
+        this.destroy();
+        new app.signupView({model: new app.User});
     },
 
 
@@ -53,5 +61,13 @@ app.LoginView = Backbone.View.extend({
     render: function () {
         this.$el.html(this.template(this.model.toJSON()));
         return this;
+    },
+
+    destroy: function () {
+        this.undelegateEvents();
+        this.$el.removeData().unbind();
+        debugger;
+        this.$el.empty();
+
     }
 });

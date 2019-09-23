@@ -8,6 +8,7 @@ app.DashboardView = Backbone.View.extend({
         'click #home': 'showLibrary',
         'click #browse': 'showLibrary',
         'click #showCart': 'showCart',
+        'click #showUserList': 'showUserList',
         'keyup #search': 'search'
     },
 
@@ -46,6 +47,12 @@ app.DashboardView = Backbone.View.extend({
         // }
         // app.DashboardView.cartView = new app.CartView();
     },
+
+    showUserList: function () {
+        $("#currentView").empty().append("Users");
+        showView(new app.UserListView());
+    },
+
 
     showLibrary: function () {
         debugger;

@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 @Transactional
 public class BookServiceImpl implements BookService {
-//    classes annotated with @Component, @Service, @Repository are considered as beans
+//    Classes annotated with @Component, @Service, @Repository are considered as beans
 //    so their objects are injected
     @Autowired
     BookDAO bookDAO;

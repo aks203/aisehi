@@ -17,6 +17,9 @@
 <spring:url value="/resources/view/AddBookView.js" var="AddBookView" />
 <spring:url value="/resources/view/Library.js" var="LibraryView" />
 <spring:url value="/resources/view/CartView.js" var="CartView" />
+<spring:url value="/resources/collection/UserCollection.js" var="UserCollection" />
+<spring:url value="/resources/view/UserView.js" var="UserView" />
+<spring:url value="/resources/view/UserListView.js" var="UserListView" />
 <spring:url value="/resources/collection/CartCollection.js" var="CartCollection" />
 <spring:url value="/resources/view/CartBookView.js" var="CartBookView" />
 
@@ -35,5 +38,8 @@
 <script src="${AddBookView}"></script>
 <script src="${DashboardModel}"></script>
 <script src="${CartView}"></script>
+<script src="${UserCollection}"></script>
+<script src="${UserView}"></script>
+<script src="${UserListView}"></script>
 <script src="${CartCollection}"></script>
 <script src="${CartBookView}"></script>

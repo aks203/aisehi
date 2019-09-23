@@ -53,6 +53,7 @@ public class BookController {
     @PostMapping()
     public @ResponseBody BookPojo addBook(@RequestBody BookPojo bookPojo){
         try {
+//            BookPojo bookPojo=new BookPojo("fjkda", "dsfa", "afda", "fadf");
             return bookService.addBook(bookPojo);
         }
         catch (HibernateException | CannotCreateTransactionException dbException) {

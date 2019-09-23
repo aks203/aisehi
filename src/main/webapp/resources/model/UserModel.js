@@ -4,6 +4,8 @@ app.User = Backbone.Model.extend({
     url: '/register',
 
     defaults: {
+        userImage: 'resources/images/user.jpg',
+        id: '',
         name: '',
         email: '',
         password: '',

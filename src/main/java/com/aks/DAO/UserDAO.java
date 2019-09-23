@@ -2,6 +2,8 @@ package com.aks.DAO;
 
 import com.aks.Entity.User;
 
+import java.util.List;
+
 public interface UserDAO{
     /**
      *
@@ -25,4 +27,6 @@ public interface UserDAO{
     int deleteUser(int user_id);
 
     String getPasswordByEmail(String email);
+
+    List<User> getUsers();
 }

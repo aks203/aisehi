@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 //This @Repository handles checked exceptions and Spring will
 //automatically register the DAO implementation
 
@@ -76,5 +78,13 @@ public class UserDAOImpl implements UserDAO {
         Query q=currentSession.createQuery("select password from User where email= :email");
         q.setParameter("email", email);
         return (String) q.uniqueResult();
+    }
+
+    @Override
+    public List<User> getUsers() {
+        Session currentSession=sessionFactory.getCurrentSession();
+        Query q=currentSession.createQuery("from User");
+        List<User> users=(List<User>)q.getResultList();
+        return users;
     }
 }

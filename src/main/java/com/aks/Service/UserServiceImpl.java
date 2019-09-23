@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Service
@@ -86,9 +87,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUser(int user_id) {
-        int i=userDAO.deleteUser(user_id);
-        return i==1;
+    public int deleteUser(int user_id) {
+        return userDAO.deleteUser(user_id);
+    }
+
+    @Override
+    public List<User> getUsers() {
+        return userDAO.getUsers();
     }
 
     /**

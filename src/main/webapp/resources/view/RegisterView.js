@@ -2,7 +2,6 @@ var app=app || {};
 
 app.signupView = Backbone.View.extend({
     el: $("#container"),
-    // template: _.template($('#userTemplate').html(), {interpolate: /\<\@\=(.+?)\@\>/gim}),
     templateReg: _.template($('#register-template').html(), {interpolate: /\<\@\=(.+?)\@\>/gim}),
 
     events: {
@@ -19,13 +18,8 @@ app.signupView = Backbone.View.extend({
     showLoginForm:function(e) {
         e.preventDefault();
         debugger;
+        this.destroy();
         app.loginView=new app.LoginView({model: new app.Auth()});
-    },
-
-    showRegisterForm: function(e){
-        e.preventDefault();
-        debugger;
-      this.render();
     },
 
     onRegFormSubmit: function (e) {
@@ -49,6 +43,14 @@ app.signupView = Backbone.View.extend({
     render: function() {
         this.$el.html(this.templateReg(this.model.toJSON()));
         return this;
+    },
+
+    destroy: function () {
+        this.undelegateEvents();
+        this.$el.removeData().unbind();
+        debugger;
+        this.$el.empty();
+
     }
 });
 

@@ -150,8 +150,8 @@
                 <a class="mdl-navigation__link"  id="home" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
                 <a class="mdl-navigation__link" id="browse" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Browse</a>
                 <a class="mdl-navigation__link" id="showCart" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>Cart</a>
-                <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Orders</a>
                 <@ if (app.role == "admin") { @>
+                <a class="mdl-navigation__link" id="showUserList" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>View Users</a>
                 <a class="mdl-navigation__link" id="addNewBook" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Add New Book</a>
                 <@ } @>
                 <a class="mdl-navigation__link" id="logoutBtn" href="#" onclick="logout('Buh-bye. See you again.')"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Logout</a>
@@ -181,6 +181,19 @@
         <@ if (app.role == "admin") { @>
         <button class="deleteBook">Delete this book</button>
         <@ } @>
+    </div>
+</script>
+
+<script id="userTemplate" type="text/template">
+    <div class="userItem">
+        <img src="<@= userImage @>"/>
+        <ul>
+            <li><span class="bookHeaders">Name: </span><span class="bookContent"><@= name @></span></li>
+            <li><span class="bookHeaders">Email: </span><span class="bookContent"><@= email @></span></li>
+            <li><span class="bookHeaders">Language: </span><span class="bookContent"><@= language @></span></li>
+            <li><span class="bookHeaders">Role: </span><span class="bookContent"><@= role @></span></li>
+        </ul>
+        <button class="deleteUser">Delete this user</button>
     </div>
 </script>
 

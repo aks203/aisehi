@@ -9,6 +9,10 @@ app.BookModel = Backbone.Model.extend({
         publisher: ''
     },
     idAttribute: 'book_id',
+    // parse: function( response ) {
+    //     response.coverImage = response.coverImage || 'resources/images/placeholder.png';
+    //     return response;
+    // },
 
     validate: function (attrs) {
         if (!attrs.title) {

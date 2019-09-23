@@ -1,6 +1,8 @@
 package com.aks.Controller;
 
+import com.aks.Entity.User;
 import com.aks.Exceptions.BadRequestException;
+import com.aks.Exceptions.CustomGenericException;
 import com.aks.Exceptions.CustomNotFoundException;
 import com.aks.Exceptions.DatabaseDownException;
 import com.aks.POJO.UserPojo;
@@ -15,6 +17,7 @@ import org.springframework.transaction.CannotCreateTransactionException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -99,4 +102,5 @@ public class RegistrationController {
     public String home(){
         return "index";
     }
+
 }

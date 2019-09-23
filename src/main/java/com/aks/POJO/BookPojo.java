@@ -31,20 +31,20 @@ public class BookPojo {
         this.publisher = publisher;
     }
 
-    /**
-     * @param title
-     * @param author
-     * @param category
-     * @param publisher
-     * @param content
-     */
-    public BookPojo(String title, String author, String category, String publisher, Blob content) {
-        this.title = title;
-        this.author = author;
-        this.category = category;
-        this.publisher = publisher;
-        this.content = content;
-    }
+//    /**
+//     * @param title
+//     * @param author
+//     * @param category
+//     * @param publisher
+//     * @param content
+//     */
+//    public BookPojo(String title, String author, String category, String publisher, Blob content) {
+//        this.title = title;
+//        this.author = author;
+//        this.category = category;
+//        this.publisher = publisher;
+//        this.content = content;
+//    }
 
     /**
      * @param book_id

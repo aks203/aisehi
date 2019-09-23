@@ -3,6 +3,8 @@ package com.aks.Service;
 import com.aks.Entity.User;
 import com.aks.POJO.UserPojo;
 
+import java.util.List;
+
 public interface UserService {
     boolean checkEmail(String email);
     //Create a subscription object using subsType int var. Then create user obj.
@@ -31,9 +33,10 @@ public interface UserService {
     /**
      *
      * @param user_id
-     * @return
+     * @return 1 if user is deleted, otherwise 0
      */
-    boolean deleteUser(int user_id);
+    int deleteUser(int user_id);
 
 
+    List<User> getUsers();
 }
