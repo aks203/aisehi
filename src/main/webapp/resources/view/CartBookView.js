@@ -5,33 +5,48 @@ app.CartBookView=Backbone.View.extend({
     classname: "cartBookContainer",
     model: app.BookModel,
     events: {
-        'click .deleteFromCart':'deleteFromCart'
+        'click .deleteFromCart':'deleteFromCart',
+        'click .returnBook':'returnBook',
+
     },
 
-    deleteFromCart: function() {
-        var book_id=this.model.attributes.book_id;
-        var self=this;
-        $.ajax({
-            url: '/api/cart/'+getUserId()+'/'+book_id,
-            type: 'DELETE',
+returnBook:function(e){
+    e.preventDefault();
+    var book_id=this.model.attributes.book_id;
+    var self=this;
+    this.model.destroy({headers:{'user_id' :getUserId()},
+            url: '/api/cart/return/'+getUserId()+'/'+book_id,
             wait: true,
-            headers: {'user_id' :getUserId()},
-            success: function(result) {
-                alert(result);
-                if(result=="Successfully deleted."){
-                    self.remove();
-                }
+            dataType: "text",
+            success: function(model, response) {
+                alert(response);
+                self.remove();
             },
-            error: function (response) {
-                debugger;
+            error: function (model, response) {
                 if(response.status==401)
                     return logout();
                 alert(response.responseJSON.message);
-            }
-        });
-        // this.model.destroy();
-        debugger;
+            }});
+
     },
+    deleteFromCart: function(e) {
+        e.preventDefault();
+        var book_id=this.model.attributes.book_id;
+        var self=this;
+        this.model.destroy({headers:{'user_id' :getUserId()},
+            url: '/api/cart/'+getUserId()+'/'+book_id,
+            wait: true,
+            dataType: "text",
+            success: function(model, response) {
+                alert(response);
+                self.remove();
+            },
+            error: function (model, response) {
+                if(response.status==401)
+                    return logout();
+                alert(response.responseJSON.message);
+            }});
+        },
 
     template: _.template($('#cartTemplate').html(), {interpolate: /\<\@\=(.+?)\@\>/gim, evaluate: /\<\@(.+?)\@\>/gim}),
 

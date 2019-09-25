@@ -19,7 +19,6 @@ app.UserListView = Backbone.View.extend({
                 }
             },
             error: function (model, response) {
-                debugger;
                 if(response.status==401)
                     return logout();
                 alert(response.responseJSON.message);
@@ -51,7 +50,6 @@ app.UserListView = Backbone.View.extend({
     destroy: function () {
         this.undelegateEvents();
         this.$el.removeData().unbind();
-        debugger;
         this.$el.empty();
 
     }

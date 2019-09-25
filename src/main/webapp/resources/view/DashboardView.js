@@ -8,7 +8,9 @@ app.DashboardView = Backbone.View.extend({
         'click #home': 'showLibrary',
         'click #browse': 'showLibrary',
         'click #showCart': 'showCart',
+        'click #orders': 'showOrders',
         'click #showUserList': 'showUserList',
+        'click #checkout': 'checkout',
         'keyup #search': 'search'
     },
 
@@ -28,10 +30,28 @@ app.DashboardView = Backbone.View.extend({
                             book.addClass("show");
                         }
                     }
-                        debugger;
                 });
             }, 1000);
         },
+
+    checkout:function(e){
+        e.preventDefault();
+        var self=this;
+        $.ajax({
+            url: '/api/cart/checkout/'+getUserId(),
+            wait: true,
+            headers: {'user_id' :getUserId()},
+            success: function(result) {
+                self.showOrders();
+                alert(result);
+            },
+            error: function (response) {
+                if(response.status==401)
+                    return logout();
+                alert(response.responseJSON.message);
+            }
+        });
+    },
 
     destroy: function () {
         this.undelegateEvents();
@@ -40,12 +60,17 @@ app.DashboardView = Backbone.View.extend({
     },
 
     showCart: function () {
-        $("#currentView").empty().append("Cart");
-        showView(new app.CartView());
+        $("#currentView").empty().append("<button id='checkout'> Checkout</button>");
+        showView(new app.CartView({type: 0}));
         // if (app.DashboardView.cartView != null) {
         //     app.DashboardView.cartView.destroy();
         // }
         // app.DashboardView.cartView = new app.CartView();
+    },
+
+    showOrders: function () {
+        $("#currentView").empty().append("Orders");
+        showView(new app.CartView({type: 1}));
     },
 
     showUserList: function () {
@@ -55,19 +80,15 @@ app.DashboardView = Backbone.View.extend({
 
 
     showLibrary: function () {
-        debugger;
         $("#currentView").empty().append("Books");
         if (app.DashboardView.libraryView != null) {
             app.DashboardView.libraryView.destroy();
-            debugger;
         }
         app.DashboardView.libraryView = new app.LibraryView();
     },
 
     showAddBookView: function () {
-        debugger;
         $("#currentView").empty().append("Add new Book");
-        debugger;
         showView(new app.AddBookView());
     },
 

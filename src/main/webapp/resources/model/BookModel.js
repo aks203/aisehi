@@ -6,7 +6,8 @@ app.BookModel = Backbone.Model.extend({
         title: '',
         author: '',
         category: '',
-        publisher: ''
+        publisher: '',
+        countBooks: 0
     },
     idAttribute: 'book_id',
     // parse: function( response ) {
@@ -30,6 +31,14 @@ app.BookModel = Backbone.Model.extend({
         if (!attrs.publisher) {
             alert('Please fill publisher field.');
             return 'Please fill publisher field.';
+        }
+        if (!attrs.countBooks) {
+            alert('Please fill count field.');
+            return 'Please fill count field.';
+        }
+        if (!attrs.countBooks>100) {
+            alert('More than 100 books can\'t be added at a time.');
+            return 'More than 100 books can\'t be added at a time.';
         }
     }
 });

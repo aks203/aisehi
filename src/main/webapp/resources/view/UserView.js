@@ -8,34 +8,27 @@ app.UserView=Backbone.View.extend({
         'click .deleteUser': 'deleteUser',
     },
 
-
     deleteUser: function() {
         var id=this.model.attributes.id;
         var self=this;
         if(id==getUserId()){
             alert("Can't delete current user!");
             return;
-
         }
-        $.ajax({
+        this.model.destroy({headers:{'user_id' :getUserId()},
             url: '/api/user/'+id,
-            type: 'DELETE',
             wait: true,
-            headers: {'user_id' :getUserId()},
-            success: function(result) {
-                debugger;
+            dataType: "text",
+            success: function(model, response) {
+                alert(response);
                 self.remove();
-                alert(result);
             },
-            error: function (response) {
-                debugger;
+            error: function (model, response) {
                 if(response.status==401)
                     return logout();
-                alert(response.responseJSON.message);
-            }
-        });
-        this.model.destroy();
-        debugger;
+                if(response.responseJSON.message)
+                    alert(response.responseJSON.message);
+            }});
     },
 
     template: _.template($('#userTemplate').html(), {interpolate: /\<\@\=(.+?)\@\>/gim, evaluate: /\<\@(.+?)\@\>/gim}),

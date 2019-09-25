@@ -1,6 +1,7 @@
 package com.aks.Controller;
 
 import com.aks.Entity.Cart;
+import com.aks.Exceptions.BadRequestException;
 import com.aks.Exceptions.CustomGenericException;
 import com.aks.Exceptions.CustomNotFoundException;
 import com.aks.Exceptions.DatabaseDownException;
@@ -34,17 +35,18 @@ public class CartController {
      * @param user_id
      * @return A list of carts corresponding to that user
      */
-    @GetMapping("/{user_id}")
+    @GetMapping("/{user_id}/{type}")
     public @ResponseBody
-    List<BookPojo> getCart(@PathVariable("user_id") Integer user_id){
+    List<BookPojo> getCart(@PathVariable("user_id") int user_id,
+            @PathVariable("type") int type) {
         try {
-            return cartService.getCart(user_id);
+            return cartService.getCart(user_id, type);
         }
         catch (HibernateException | CannotCreateTransactionException dbException) {
             throw new DatabaseDownException("Database error. Could not connect at this time.");
         }
         catch (Exception ex){
-            throw new CustomGenericException("Could not retrive cart at this time. Please try again later.");
+              throw new CustomGenericException("Could not retrieve cart at this time. Please try again later.", ex);
         }
     }
 
@@ -65,7 +67,7 @@ public class CartController {
             throw new DatabaseDownException("Database error. Could not connect at this time.");
         }
         catch (Exception ex){
-            throw new CustomGenericException("Could not add book to cart at this time. Please try again later.");
+            throw new CustomGenericException("Could not add book to cart at this time. Please try again later.", ex);
         }
     }
 
@@ -86,31 +88,44 @@ public class CartController {
             throw new DatabaseDownException("Database error. Could not connect at this time.");
         }
         catch (Exception ex){
-            throw new CustomGenericException("Error deleting book from cart. Please try after sometime.");
+            throw new CustomGenericException("Error deleting book from cart. Please try after sometime.", ex);
         }
     }
 
-//    @RequestMapping("/checkout/{user_id}")
-//    public @ResponseBody
-//    String checkout(@PathVariable("user_id") Integer user_id){
-//        try{
-//            List<BookPojo> cart = cartService.getCart(user_id);
-//            if (cart.size() == 0) {
-//                return "Cart empty. Please add some books to checkout.";
-//            }
-//            List<BookPojo> currBooks =new ArrayList<>();
-//            if (currBooks.size() + cart.size() > 10) {
-//                return "Maximum 10 books can be issued at a time. Must return a book or remove from cart to issue new.";
-//            }
-//
-//
-//            return "Successfully checked out. Have a great time reading.";
-//        }
-//        catch (HibernateException | CannotCreateTransactionException dbException) {
-//            throw new DatabaseDownException("Database error. Could not connect at this time.");
-//        }
-//        catch (Exception ex){
-//            throw new CustomGenericException("Error deleting book from cart. Please try after sometime.");
-//        }
-//    }
+    /**
+     * @param user_id
+     * @return Message whether checkout is successful or not
+     */
+    @RequestMapping("/checkout/{user_id}")
+    public @ResponseBody
+    String checkout(@PathVariable("user_id") Integer user_id){
+        try{
+            return cartService.checkoutBooks(user_id);
+        }
+        catch (HibernateException | CannotCreateTransactionException dbException) {
+            throw new DatabaseDownException("Database error. Could not connect at this time.");
+        }
+        catch (Exception ex){
+            throw new CustomGenericException("Error checking out book. Please try after sometime.", ex);
+        }
+    }
+
+    /**
+     * @param user_id
+     * @return Message whether checkout is successful or not
+     */
+    @RequestMapping("/return/{user_id}/{book_id}")
+    public @ResponseBody
+    String returnBook(@PathVariable("user_id") Integer user_id,
+                    @PathVariable("book_id") Integer book_id){
+        try{
+            return cartService.returnBook(user_id, book_id);
+        }
+        catch (HibernateException | CannotCreateTransactionException dbException) {
+            throw new DatabaseDownException("Database error. Could not connect at this time.");
+        }
+        catch (Exception ex){
+            throw new CustomGenericException("Error checking out book. Please try after sometime.", ex);
+        }
+    }
 }

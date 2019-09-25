@@ -67,4 +67,12 @@ public class BookDAOImpl implements BookDAO {
         return q.executeUpdate();
 
     }
+
+    @Override
+    public int getCount(int book_id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query q = currentSession.createQuery("select countBooks from Book where book_id= :id");
+        q.setParameter("id", book_id);
+        return (Integer) q.uniqueResult();
+    }
 }

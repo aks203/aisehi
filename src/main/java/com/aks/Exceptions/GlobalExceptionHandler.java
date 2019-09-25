@@ -1,9 +1,5 @@
 package com.aks.Exceptions;
 
-import com.aks.Exceptions.BadRequestException;
-import com.aks.Exceptions.CustomNotFoundException;
-import com.aks.Exceptions.CustomGenericException;
-import com.aks.Exceptions.DatabaseDownException;
 import com.aks.POJO.CustomExceptionPojo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +46,6 @@ public class GlobalExceptionHandler {
         error.setMessage(exc.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
-
 
     /**
      * Custom Exception handler method for SERVICE_UNAVAILABLE

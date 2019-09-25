@@ -34,21 +34,26 @@ public class UserController {
         } catch (HibernateException | CannotCreateTransactionException dbException) {
             throw new DatabaseDownException("Database error. Could not connect at this time.");
         } catch (Exception ex) {
-            throw new CustomGenericException("Unable to retrive users at this time. Please try again later.");
+            throw new CustomGenericException("Unable to retrieve users at this time. Please try again later.", ex);
         }
     }
 
     /**
-     * Delete user by id
      * @param id
-     * @return Message
+     * @return String if user is deleted successfully
+     * @throws CustomNotFoundException
+     * @throws CustomGenericException
      */
     @DeleteMapping(value = "/{id}")
-    public @ResponseBody String deleteUser(@PathVariable("id") Integer id){
-        if(!(userService.deleteUser(id) >0)){
-            throw new CustomNotFoundException("Unable to delete user.");
+    public @ResponseBody String deleteUser(@PathVariable("id") Integer id) throws CustomNotFoundException,
+            CustomGenericException{
+        try {
+            if (!(userService.deleteUser(id) > 0)) {
+                throw new CustomNotFoundException("Unable to delete user.");
+            }
+            return "User deleted successfully.";
+        } catch (Exception ex) {
+            throw new CustomGenericException("Can't delete right now. Try later.", ex);
         }
-        return "User deleted successfully.";
     }
-
 }

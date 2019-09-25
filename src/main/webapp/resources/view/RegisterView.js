@@ -17,7 +17,6 @@ app.signupView = Backbone.View.extend({
 
     showLoginForm:function(e) {
         e.preventDefault();
-        debugger;
         this.destroy();
         app.loginView=new app.LoginView({model: new app.Auth()});
     },
@@ -48,7 +47,6 @@ app.signupView = Backbone.View.extend({
     destroy: function () {
         this.undelegateEvents();
         this.$el.removeData().unbind();
-        debugger;
         this.$el.empty();
 
     }

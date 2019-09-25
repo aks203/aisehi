@@ -30,7 +30,7 @@ public class BookServiceImpl implements BookService {
                         newBook.getAuthor(),
                         newBook.getCategory(),
                         newBook.getPublisher(),
-                        newBook.getContent()));
+                        newBook.getCountBooks()));
             }
         }catch (Exception ex){
             ex.printStackTrace();
@@ -44,7 +44,8 @@ public class BookServiceImpl implements BookService {
                 bookPojo.getAuthor(),
                 bookPojo.getCategory(),
                 bookPojo.getContent(),
-                bookPojo.getPublisher());
+                bookPojo.getPublisher(),
+                bookPojo.getCountBooks());
         int id = bookDAO.addBook(book);
         return this.getBookById(id);
     }
@@ -60,7 +61,7 @@ public class BookServiceImpl implements BookService {
                 returnedBook.getAuthor(),
                 returnedBook.getCategory(),
                 returnedBook.getPublisher(),
-                returnedBook.getContent());
+                returnedBook.getCountBooks());
     }
 
     @Override

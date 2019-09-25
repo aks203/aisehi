@@ -24,24 +24,29 @@ public class Book {
     @Column(name = "CATEGORY")
     private String category;
 
-    @Column(name="content")
+    @Column(name="CONTENT")
     @Lob
     private Blob content;
 
     @Column(name = "PUBLISHER")
     private String publisher;
 
+    @Column(name = "COUNTBOOKS")
+    private int countBooks;
+
     /**
      * @param title
      * @param author
      * @param category
      * @param publisher
+     * @param countBooks
      */
-    public Book(String title, String author, String category, String publisher) {
+    public Book(String title, String author, String category, String publisher, int countBooks) {
         this.title = title;
         this.author = author;
         this.category = category;
         this.publisher = publisher;
+        this.countBooks = countBooks;
     }
 
     /**
@@ -50,15 +55,16 @@ public class Book {
      * @param category
      * @param content
      * @param publisher
+     * @param countBooks
      */
-    public Book(String title, String author, String category, Blob content, String publisher) {
+    public Book(String title, String author, String category, Blob content, String publisher, int countBooks) {
         this.title = title;
         this.author = author;
         this.category = category;
         this.content = content;
         this.publisher = publisher;
+        this.countBooks = countBooks;
     }
-
 
     /**
      * Default Constructor
@@ -190,5 +196,24 @@ public class Book {
      */
     public Blob getContent() {
         return content;
+    }
+
+
+    /**
+     * Gets countBooks.
+     *
+     * @return Value of countBooks.
+     */
+    public int getCountBooks() {
+        return countBooks;
+    }
+
+    /**
+     * Sets new countBooks.
+     *
+     * @param countBooks New value of countBooks.
+     */
+    public void setCountBooks(int countBooks) {
+        this.countBooks = countBooks;
     }
 }

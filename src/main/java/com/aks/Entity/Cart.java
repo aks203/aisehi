@@ -21,6 +21,14 @@ public class Cart {
     private int book_id;
 
     /**
+     * 0- Normal cart
+     * 1- Issued Books
+     * 2-Returned Books
+     */
+    @Column(name = "TYPE")
+    private int type;
+
+    /**
      * @param user_id
      * @param book_id
      */
@@ -33,6 +41,17 @@ public class Cart {
      * Default Constructor
      */
     public Cart() {
+    }
+
+    /**
+     * @param user_id
+     * @param book_id
+     * @param type
+     */
+    public Cart(int user_id, int book_id, int type) {
+        this.user_id = user_id;
+        this.book_id = book_id;
+        this.type = type;
     }
 
     /**
@@ -82,10 +101,26 @@ public class Cart {
 
     /**
      * Sets new book_id.
-     *
      * @param book_id New value of book_id.
      */
     public void setBook_id(int book_id) {
         this.book_id = book_id;
+    }
+
+
+    /**
+     * Gets type.
+     * @return Value of type.
+     */
+    public int getType() {
+        return type;
+    }
+
+    /**
+     * Sets new type.
+     * @param type New value of type.
+     */
+    public void setType(int type) {
+        this.type = type;
     }
 }

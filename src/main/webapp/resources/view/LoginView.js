@@ -18,7 +18,6 @@ app.LoginView = Backbone.View.extend({
 
     showRegisterForm: function(e){
         e.preventDefault();
-        debugger;
         this.destroy();
         new app.signupView({model: new app.User});
     },
@@ -35,7 +34,6 @@ app.LoginView = Backbone.View.extend({
             contentType: "application/json"
         }, {
             success: function (model, response) {
-                debugger;
                 console.log("Login success");
                 // if(response.status=="Error"){
                 //     $("#loginMsg").html(response.msg);
@@ -43,15 +41,12 @@ app.LoginView = Backbone.View.extend({
                 // else {
                 sessionStorage.setItem("response", JSON.stringify(response));
                 app.role = response.user.role;
-                debugger;
                 self.undelegateEvents();
                 self.$el.empty();
-                debugger;
                 showDashboard(response);
             },
             error: function (model, response) {
                 $("#loginMsg").html(response.responseJSON.message);
-                debugger;
                 console.log("Error: " + response + " .. ");
             }, wait: true
         });
@@ -66,7 +61,6 @@ app.LoginView = Backbone.View.extend({
     destroy: function () {
         this.undelegateEvents();
         this.$el.removeData().unbind();
-        debugger;
         this.$el.empty();
 
     }

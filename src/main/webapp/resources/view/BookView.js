@@ -11,7 +11,6 @@ app.BookView=Backbone.View.extend({
 
     addToCart: function(){
         var book_id=this.model.attributes.book_id;
-        debugger;
         var user_id=getUserId();
         $.ajax({
             url: '/api/cart/add/'+user_id+'/'+book_id,
@@ -19,14 +18,13 @@ app.BookView=Backbone.View.extend({
             wait: true,
             headers: {'user_id' :user_id},
             success: function(result) {
-                debugger;
                 alert(result);
             },
             error: function (response) {
-                debugger;
                 if(response.status==401)
                     return logout();
-                alert(response.responseJSON.message);
+                if(response.responseJSON.message)
+                    alert(response.responseJSON.message);
             }
         });
     },
@@ -34,25 +32,20 @@ app.BookView=Backbone.View.extend({
     deleteBook: function() {
         var id=this.model.attributes.book_id;
         var self=this;
-        $.ajax({
+        this.model.destroy({headers:{'user_id' :getUserId()},
             url: '/api/books/'+id,
-            type: 'DELETE',
             wait: true,
-            headers: {'user_id' :getUserId()},
-            success: function(result) {
-                debugger;
+            dataType: "text",
+            success: function(model, response) {
+                alert(response);
                 self.remove();
-                alert(result);
             },
-            error: function (response) {
-                debugger;
+            error: function (model, response) {
                 if(response.status==401)
                     return logout();
-                alert(response.responseJSON.message);
-            }
-        });
-        this.model.destroy();
-        debugger;
+                if(response.responseJSON.message)
+                    alert(response.responseJSON.message);
+            }});
     },
 
     template: _.template($('#bookTemplate').html(), {interpolate: /\<\@\=(.+?)\@\>/gim, evaluate: /\<\@(.+?)\@\>/gim}),

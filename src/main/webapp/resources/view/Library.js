@@ -3,40 +3,9 @@ var app = app || {};
 app.LibraryView = Backbone.View.extend({
     el: '#content',
 
-    events:{
-        'click #addBookBtn':'addBook'
-    },
-
-    addBook: function( e ) {
-        e.preventDefault();
-        var formData = {};
-
-        $( '#addBookForm div' ).children( 'input' ).each( function( i, el ) {
-            if( $( el ).val() !== '' )
-            {
-                formData[ el.id ] = $( el ).val();
-            }
-        });
-        this.collection.create( formData,
-            {   wait: true,
-                headers: {'user_id' :getUserId()},
-                success: function (response){
-                    alert("Book added successfully.")
-                },
-                error: function (model, response) {
-                    debugger;
-                    if(response.status==401)
-                        return logout();
-                    alert(response.responseJSON.message);
-                }
-            } );
-        debugger;
-        var frm=$("#addBookForm")[0];
-        frm.reset();
-    },
-
     initialize: function( ) {
-        this.collection = new app.BookCollection();
+        app.bookCollection=new app.BookCollection();
+        this.collection = app.bookCollection;
         // The models are fetched asynchronously after the page is rendered.
         // When the fetch completes, Backbone fires the reset event,
         // as requested by the reset: true option, and our listener re-renders the view.
@@ -46,14 +15,13 @@ app.LibraryView = Backbone.View.extend({
                 alert("No book available in library now. Please visit later.");
             },
             error: function (model, response) {
-                debugger;
+
                 if(response.status==401)
                     return logout();
                 alert(response.responseJSON.message);
             },
             wait: true,
             headers: {'user_id' :getUserId()}});
-        debugger;
         this.render();
         this.listenTo( this.collection, 'reset', this.render );
     },
@@ -79,7 +47,6 @@ app.LibraryView = Backbone.View.extend({
     destroy: function () {
         this.undelegateEvents();
         this.$el.removeData().unbind();
-        debugger;
         this.$el.empty();
 
     }

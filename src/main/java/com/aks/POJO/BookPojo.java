@@ -17,34 +17,23 @@ public class BookPojo {
 
     private Blob content;
 
+    private int countBooks;
+
     /**
-     *
      * @param title
      * @param author
      * @param category
      * @param publisher
+     * @param countBooks
      */
-    public BookPojo(String title, String author, String category, String publisher) {
+    public BookPojo(String title, String author, String category, String publisher, int countBooks) {
         this.title = title;
         this.author = author;
         this.category = category;
         this.publisher = publisher;
+        this.countBooks = countBooks;
     }
 
-//    /**
-//     * @param title
-//     * @param author
-//     * @param category
-//     * @param publisher
-//     * @param content
-//     */
-//    public BookPojo(String title, String author, String category, String publisher, Blob content) {
-//        this.title = title;
-//        this.author = author;
-//        this.category = category;
-//        this.publisher = publisher;
-//        this.content = content;
-//    }
 
     /**
      * @param book_id
@@ -52,16 +41,17 @@ public class BookPojo {
      * @param author
      * @param category
      * @param publisher
-     * @param content
+     * @param countBooks
      */
-    public BookPojo(int book_id, String title, String author, String category, String publisher, Blob content) {
+    public BookPojo(int book_id, String title, String author, String category, String publisher, int countBooks) {
         this.book_id = book_id;
         this.title = title;
         this.author = author;
         this.category = category;
         this.publisher = publisher;
-        this.content = content;
+        this.countBooks = countBooks;
     }
+
 
     /**
      * Default Constructor
@@ -69,21 +59,6 @@ public class BookPojo {
     public BookPojo() {
     }
 
-    /**
-     *
-     * @param book_id
-     * @param title
-     * @param author
-     * @param category
-     * @param publisher
-     */
-    public BookPojo(int book_id, String title, String author, String category, String publisher) {
-        this.book_id = book_id;
-        this.title = title;
-        this.author = author;
-        this.category = category;
-        this.publisher = publisher;
-    }
 
     /**
      *
@@ -99,6 +74,8 @@ public class BookPojo {
                 ", publisher='" + publisher + '\'' +
                 '}';
     }
+
+
 
     /**
      * Gets publisher.
@@ -210,5 +187,23 @@ public class BookPojo {
      */
     public Blob getContent() {
         return content;
+    }
+
+    /**
+     * Gets count.
+     *
+     * @return Value of countBooks.
+     */
+    public int getCountBooks() {
+        return countBooks;
+    }
+
+    /**
+     * Sets new count.
+     *
+     * @param countBooks New value of count.
+     */
+    public void setCountBooks(int countBooks) {
+        this.countBooks = countBooks;
     }
 }

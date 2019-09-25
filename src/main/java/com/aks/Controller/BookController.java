@@ -41,7 +41,7 @@ public class BookController {
             throw new DatabaseDownException("Database error. Could not connect at this time.");
         }
         catch (Exception ex){
-            throw new CustomGenericException("Unable to retrive books at this time. Please try again later.");
+            throw new CustomGenericException("Unable to retrive books at this time. Please try again later.", ex);
         }
     }
 
@@ -60,7 +60,7 @@ public class BookController {
             throw new DatabaseDownException("Database error. Could not connect at this time.");
         }
         catch (Exception ex){
-            throw new CustomGenericException("Book can't be saved at this time. Please try again later.");
+            throw new CustomGenericException("Book can't be saved at this time. Please try again later.", ex);
         }
     }
 

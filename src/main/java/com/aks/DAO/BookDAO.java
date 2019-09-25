@@ -12,4 +12,6 @@ public interface BookDAO {
     Book getBookById(int id);
 
     int deleteBook(Integer id);
+
+    int getCount(int book_id);
 }

@@ -57,6 +57,9 @@ public class RegistrationController {
         } catch (HibernateException | CannotCreateTransactionException dbException) {
             throw new DatabaseDownException("Database error. Could not connect at this time.");
         }
+        catch (Exception ex) {
+            throw new CustomGenericException("Unable to login at this time. Please try again later.", ex);
+        }
     }
 
 
@@ -73,9 +76,6 @@ public class RegistrationController {
             if (user.getName()== "" || user.getEmail() == "" || user.getPassword() == "" ||
                      !userService.checkEmail(user.getEmail())) {
                 throw new BadRequestException("Error creating user. Please fill all the details correctly.");
-//                userDetails.put("status", "Error");
-//                userDetails.put("msg", "\"Error creating user. Please fill all the details correctly..\"");
-//                return userDetails;
             }
             userDetails.put("user", userService.createUser(user.getName(), user.getEmail(),
                     user.getPassword(), user.getLanguage(), user.getRole()));
@@ -92,6 +92,10 @@ public class RegistrationController {
         catch (HibernateException | CannotCreateTransactionException dbException) {
             throw new DatabaseDownException("Database error. Could not connect at this time.");
         }
+        catch (Exception ex) {
+            throw new CustomGenericException("Unable to register at this time. Please try again later.", ex);
+        }
+
     }
 
     /**
@@ -102,5 +106,4 @@ public class RegistrationController {
     public String home(){
         return "index";
     }
-
 }
