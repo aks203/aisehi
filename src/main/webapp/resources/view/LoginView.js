@@ -8,7 +8,6 @@ app.LoginView = Backbone.View.extend({
     events: {
         'click #login-btn': 'onLoginFormSubmit',
         'click #showRegister': 'showRegisterForm'
-        // 'click #showLogin': 'showLoginForm',
     },
 
     initialize: function () {

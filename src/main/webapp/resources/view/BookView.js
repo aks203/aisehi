@@ -6,7 +6,13 @@ app.BookView=Backbone.View.extend({
     model: app.BookModel,
     events: {
         'click .deleteBook': 'deleteBook',
-        'click .addToCart': 'addToCart'
+        'click .addToCart': 'addToCart',
+        'click .showUpdateBookView': 'showUpdateBookView'
+    },
+
+    showUpdateBookView: function () {
+        $("#currentView").empty().append("Update this Book");
+        showView(new app.UpdateBookView({item:this.model}));
     },
 
     addToCart: function(){

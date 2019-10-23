@@ -16,4 +16,6 @@ public interface BookService {
     BookPojo getBookById(int id);
 
     int deleteBook(Integer id);
+
+    BookPojo updateBook(BookPojo bookPojo);
 }

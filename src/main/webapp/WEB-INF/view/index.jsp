@@ -4,7 +4,7 @@
 
 <%@include file="./index.html" %>
 
-<spring:url value="/resources/functions.js" var="Functions" />
+<spring:url value="/resources/app.js" var="Functions" />
 <spring:url value="/resources/view/RegisterView.js" var="RegView" />
 <spring:url value="/resources/model/BookModel.js" var="BookModel" />
 <spring:url value="/resources/collection/BookCollection.js" var="BookCollection" />
@@ -20,6 +20,7 @@
 <spring:url value="/resources/collection/UserCollection.js" var="UserCollection" />
 <spring:url value="/resources/view/UserView.js" var="UserView" />
 <spring:url value="/resources/view/UserListView.js" var="UserListView" />
+<spring:url value="/resources/view/UpdateBookView.js" var="UpdateBookView" />
 <spring:url value="/resources/collection/CartCollection.js" var="CartCollection" />
 <spring:url value="/resources/view/CartBookView.js" var="CartBookView" />
 
@@ -41,5 +42,6 @@
 <script src="${UserCollection}"></script>
 <script src="${UserView}"></script>
 <script src="${UserListView}"></script>
+<script src="${UpdateBookView}"></script>
 <script src="${CartCollection}"></script>
 <script src="${CartBookView}"></script>

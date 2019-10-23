@@ -127,14 +127,6 @@
                         <label class="mdl-textfield__label" for="search">Enter your query...</label>
                     </div>
                 </div>
-                <!--<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button&#45;&#45;icon" id="hdrbtn">-->
-                    <!--<i class="material-icons">more_vert</i>-->
-                <!--</button>-->
-                <!--<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu&#45;&#45;bottom-right" for="hdrbtn">-->
-                    <!--<li class="mdl-menu__item">About</li>-->
-                    <!--<li class="mdl-menu__item">Contact</li>-->
-                    <!--<li class="mdl-menu__item">Legal information</li>-->
-                <!--</ul>-->
             </div>
         </header>
         <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
@@ -169,7 +161,7 @@
 </script>
 
 <script id="bookTemplate" type="text/template">
-    <div class="bookItem">
+    <div class="bookItem searchableItem">
     <img src="<@= coverImage @>"/>
     <ul>
         <li><span class="bookHeaders">Title: </span><span class="bookContent"><@= title @></span></li>
@@ -179,7 +171,8 @@
     </ul>
     <button class="addToCart">Add to cart</button>
         <@ if (app.role == "admin") { @>
-        <button class="deleteBook">Delete this book</button>
+        <button class="showUpdateBookView">Update</button>
+        <button class="deleteBook">Delete</button>
         <@ } @>
     </div>
 </script>
@@ -200,13 +193,13 @@
 </script>
 
 <script id="cartTemplate" type="text/template">
-    <div class="cartItem">
+    <div class="cartItem searchableItem">
         <img src="<@= coverImage @>"/>
         <ul>
-            <li><span class="bookHeaders">Title: </span><@= title @></li>
-            <li><span class="bookHeaders">Author: </span><@= author @></li>
-            <li><span class="bookHeaders">Category: </span><@= category @></li>
-            <li><span class="bookHeaders">Publisher: </span><@= publisher @></li>
+            <li><span class="bookHeaders">Title: </span><span class="bookContent"><@= title @></span></li>
+            <li><span class="bookHeaders">Author: </span><span class="bookContent"><@= author @></span></li>
+            <li><span class="bookHeaders">Category: </span><span class="bookContent"><@= category @></span></li>
+            <li><span class="bookHeaders">Publisher: </span><span class="bookContent"><@= publisher @></span></li>
         </ul>
         <@ if (app.type == 0) { @>
         <button class="deleteFromCart">Remove this book</button>
@@ -217,18 +210,16 @@
     </div>
 </script>
 
-
 <script id="AddBookTemplate" type="text/template">
     <div id="addBook">
         <form id="addBookForm">
             <div>
                 <label for="coverImage">CoverImage: </label><input id="coverImage" type="file" />
-                <label for="title">Title: </label><input id="title" type="text" />
-                <label for="author">Author: </label><input id="author" type="text" />
-                <label for="category">Category: </label><input id="category" type="text" />
-                <label for="publisher">Publisher: </label><input id="publisher" type="text" />
-                <label for="countBooks">Count: </label><input id="countBooks" type="number" min="1"/>
-                <button id="addBookBtn" >Add Book</button>
+                <label for="title">Title: </label><input id="title" type="text" value="<@= title @>"/>
+                <label for="author">Author: </label><input id="author" type="text" value="<@= author @>"/>
+                <label for="category">Category: </label><input id="category" type="text" value="<@= category @>"/>
+                <label for="publisher">Publisher: </label><input id="publisher" type="text" value="<@= publisher @>"/>
+                <label for="countBooks">Count: </label><input id="countBooks" type="number" min="1" value="<@= countBooks @>"/>
             </div>
         </form>
     </div>

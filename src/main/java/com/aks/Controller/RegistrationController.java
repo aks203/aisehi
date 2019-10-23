@@ -95,7 +95,6 @@ public class RegistrationController {
         catch (Exception ex) {
             throw new CustomGenericException("Unable to register at this time. Please try again later.", ex);
         }
-
     }
 
     /**

@@ -1,17 +1,17 @@
 var app = app || {};
 
-app.AddBookView = Backbone.View.extend({
+app.UpdateBookView = Backbone.View.extend({
     el: '#content',
     template: _.template($('#AddBookTemplate').html(), {interpolate: /\<\@\=(.+?)\@\>/gim, evaluate: /\<\@(.+?)\@\>/gim}),
+    model: app.BookModel,
 
     events:{
-        'click #addBookBtn':'addBook'
+        'click #updateBookBtn':'updateBook'
     },
 
-    addBook: function( e ) {
+    updateBook: function( e ) {
         e.preventDefault();
         var formData = {};
-
         $( '#addBookForm div' ).children( 'input' ).each( function( i, el ) {
             if( $( el ).val() !== '' )
             {
@@ -21,13 +21,18 @@ app.AddBookView = Backbone.View.extend({
                 formData[ el.id ] =parseInt($( el ).val());
             }
         });
-        this.collection.create( formData,
+        this.model.save( formData,
             {   wait: true,
+                url: "api/books",
                 headers: {'user_id' :getUserId()},
                 success: function (response){
-                    alert("Book added successfully.")
+                debugger;
+                    alert("Book updated successfully.");
+                    debugger;
+                    app.DashboardView.prototype.showLibrary();
                 },
                 error: function (model, response) {
+                debugger;
                     if(response.status==401)
                         return logout();
                     alert(response.responseJSON.message);
@@ -37,14 +42,15 @@ app.AddBookView = Backbone.View.extend({
         frm.reset();
     },
 
-    initialize:function(){
-        this.collection=app.bookCollection;
-        // this.render();
+    initialize:function(options){
+        // this.collection=app.bookCollection;
+        debugger
+        this.model=options.item;
+        this.render();
     },
     render: function() {
-        debugger;
-        this.$el.html(this.template(new app.BookModel().attributes));
-        this.$el.append("<button id='addBookBtn'>Add Book</button>");
+        this.$el.html(this.template(this.model.attributes));
+        this.$el.append("<button id='updateBookBtn'>Update Book</button>");
         return this;
     }
 });

@@ -8,6 +8,7 @@ app.CartView = Backbone.View.extend({
 
     initialize: function(options) {
         this.collection = new app.CartCollection();
+        var self=this;
         app.type=options.type;
         debugger;
         // The models are fetched asynchronously after the page is rendered.
@@ -19,7 +20,8 @@ app.CartView = Backbone.View.extend({
                 if(response.status==401)
                     return logout();
                 if(response.responseJSON.message!=null)
-                    alert(response.responseJSON.message);
+                    self.$el.html("<p class ='messageTxt'>"+ response.responseJSON.message);
+                debugger;
             },
             wait: true,
             headers: {'user_id' :getUserId()}

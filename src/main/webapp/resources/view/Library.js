@@ -6,19 +6,20 @@ app.LibraryView = Backbone.View.extend({
     initialize: function( ) {
         app.bookCollection=new app.BookCollection();
         this.collection = app.bookCollection;
+        var self=this;
         // The models are fetched asynchronously after the page is rendered.
         // When the fetch completes, Backbone fires the reset event,
         // as requested by the reset: true option, and our listener re-renders the view.
         this.collection.fetch({reset: true,
             success: function (response) {
             if(!response.length)
-                alert("No book available in library now. Please visit later.");
+                self.$el.html("<p class ='messageTxt'> No book available in library now. Please visit later.");
             },
             error: function (model, response) {
 
                 if(response.status==401)
                     return logout();
-                alert(response.responseJSON.message);
+                self.$el.html("<p class ='messageTxt'>"+ response.responseJSON.message);
             },
             wait: true,
             headers: {'user_id' :getUserId()}});

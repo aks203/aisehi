@@ -16,12 +16,14 @@ app.DashboardView = Backbone.View.extend({
 
     search: function(e){
             setTimeout(function () {
-                $(".bookItem").removeClass('hide');
-                $(".bookItem").removeClass('show');
+                debugger;
+                $(".searchableItem").removeClass('hide');
+                $(".searchableItem").removeClass('show');
                 var g=$(e.target).val().toLowerCase();
-                $(".bookItem .bookContent").each(function() {
+                $(".searchableItem .bookContent").each(function() {
                     var s = $(this).text().toLowerCase();
-                    var book=$(this).closest('.bookItem');
+                    var book=$(this).closest('.searchableItem');
+                    debugger;
                     if(!book.hasClass("show")){
                         if(s.indexOf(g) == -1) {
                             book.addClass("hide");
@@ -78,7 +80,6 @@ app.DashboardView = Backbone.View.extend({
         showView(new app.UserListView());
     },
 
-
     showLibrary: function () {
         $("#currentView").empty().append("Books");
         if (app.DashboardView.libraryView != null) {
@@ -104,7 +105,7 @@ app.DashboardView = Backbone.View.extend({
         this.showLibrary();
     },
     render: function () {
-        this.$el.html(this.template(this.model.toJSON()));
+        this.$el.html(this.template(this.model.attributes));
         componentHandler.upgradeDom();
         // Enables us to reuse the view as a sub-view.
         // Can also be used to pre-render the view prior to rendering.

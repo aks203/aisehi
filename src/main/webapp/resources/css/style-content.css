@@ -3,6 +3,11 @@ body {
     background: #63738a;
 }
 
+.messageTxt{
+    color: red;
+    font-size: 24px;
+}
+
 #addBookForm label {
     width: 100px;
     margin-right: 10px;
@@ -21,9 +26,10 @@ body {
     clear: both;
 }
 
-#addBookBtn {
+#addBookBtn, #updateBookBtn {
+    height: 60px;
     display: block;
-    margin: 5px 20px 10px 10px;
+    margin: 35px 20px 10px 10px;
     float: right;
     clear: both;
 }
@@ -69,7 +75,6 @@ body {
 .bookItem img, .cartItem img, .userItem img{
     float: left;
     margin: 10px;
-
 }
 
  .bookItem ul, .cartItem ul, .userItem ul{
@@ -79,8 +84,8 @@ body {
 }
 
 .bookItem button, .cartItem button, .userItem button {
-    float: right;
-    margin: 10px;
+    margin: 15px 5px 5px 5px;
+    display: inline-flex;
 }
 
 .hide{

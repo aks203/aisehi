@@ -1,6 +1,7 @@
 package com.aks.DAO;
 
 import com.aks.Entity.Book;
+import com.aks.POJO.BookPojo;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface BookDAO {
     int deleteBook(Integer id);
 
     int getCount(int book_id);
+
+    Book updateBook(BookPojo bookPojo);
 }

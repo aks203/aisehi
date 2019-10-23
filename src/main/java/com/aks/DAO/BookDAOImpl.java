@@ -1,6 +1,7 @@
 package com.aks.DAO;
 
 import com.aks.Entity.Book;
+import com.aks.POJO.BookPojo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -24,7 +25,7 @@ public class BookDAOImpl implements BookDAO {
     @Override
     public List<Book> getBooks(){
         Session currentSession=sessionFactory.getCurrentSession();
-        Query q=currentSession.createQuery("from Book");
+        Query q=currentSession.createQuery("from Book where countBooks>0");
         return (List<Book>)q.getResultList();
     }
 
@@ -74,5 +75,19 @@ public class BookDAOImpl implements BookDAO {
         Query q = currentSession.createQuery("select countBooks from Book where book_id= :id");
         q.setParameter("id", book_id);
         return (Integer) q.uniqueResult();
+    }
+
+    @Override
+    public Book updateBook(BookPojo bookPojo) {
+        Session currentSession=sessionFactory.getCurrentSession();
+        Book book=this.getBookById(bookPojo.getBook_id());
+        book.setTitle(bookPojo.getTitle());
+        book.setAuthor(bookPojo.getAuthor());
+        book.setCategory(bookPojo.getCategory());
+        book.setCountBooks(bookPojo.getCountBooks());
+        book.setPublisher(bookPojo.getPublisher());
+        this.addBook(book);
+        currentSession.update(book);
+        return book;
     }
 }

@@ -41,7 +41,7 @@ public class BookController {
             throw new DatabaseDownException("Database error. Could not connect at this time.");
         }
         catch (Exception ex){
-            throw new CustomGenericException("Unable to retrive books at this time. Please try again later.", ex);
+            throw new CustomGenericException("Unable to retrieve books at this time. Please try again later.", ex);
         }
     }
 
@@ -64,6 +64,23 @@ public class BookController {
         }
     }
 
+    /**
+     * Add book to DB
+     * @param bookPojo
+     * @return book with id attribute
+     */
+    @PutMapping()
+    public @ResponseBody BookPojo updateBook(@RequestBody BookPojo bookPojo){
+        try {
+            return bookService.updateBook(bookPojo);
+        }
+        catch (HibernateException | CannotCreateTransactionException dbException) {
+            throw new DatabaseDownException("Database error. Could not connect at this time.");
+        }
+        catch (Exception ex){
+            throw new CustomGenericException("Book can't be saved at this time. Please try again later.", ex);
+        }
+    }
     /**
      * Delete book by id
      * @param id

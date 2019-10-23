@@ -10,11 +10,11 @@ app.CartBookView=Backbone.View.extend({
 
     },
 
-returnBook:function(e){
-    e.preventDefault();
-    var book_id=this.model.attributes.book_id;
-    var self=this;
-    this.model.destroy({headers:{'user_id' :getUserId()},
+    returnBook:function(e){
+        e.preventDefault();
+        var book_id=this.model.attributes.book_id;
+        var self=this;
+        this.model.destroy({headers:{'user_id' :getUserId()},
             url: '/api/cart/return/'+getUserId()+'/'+book_id,
             wait: true,
             dataType: "text",
@@ -26,7 +26,8 @@ returnBook:function(e){
                 if(response.status==401)
                     return logout();
                 alert(response.responseJSON.message);
-            }});
+            }
+        });
 
     },
     deleteFromCart: function(e) {

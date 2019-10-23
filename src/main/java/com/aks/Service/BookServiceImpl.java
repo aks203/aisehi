@@ -2,6 +2,8 @@ package com.aks.Service;
 
 import com.aks.DAO.BookDAO;
 import com.aks.Entity.Book;
+import com.aks.Exceptions.BadRequestException;
+import com.aks.Exceptions.CustomGenericException;
 import com.aks.Exceptions.CustomNotFoundException;
 import com.aks.POJO.BookPojo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +69,21 @@ public class BookServiceImpl implements BookService {
     @Override
     public int deleteBook(Integer id){
            return bookDAO.deleteBook(id);
+    }
+
+    @Override
+    public BookPojo updateBook(BookPojo bookPojo) {
+        Book book=bookDAO.updateBook(bookPojo);
+        BookPojo updatedBook=new BookPojo(
+                book.getBook_id(),
+                book.getTitle(),
+                book.getAuthor(),
+                book.getCategory(),
+                book.getPublisher(),
+                book.getCountBooks()
+        );
+        if(updatedBook!=null)
+            return updatedBook;
+        else throw new BadRequestException("Unable to update book now. Please try again later.");
     }
 }

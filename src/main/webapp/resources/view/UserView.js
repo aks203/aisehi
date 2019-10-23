@@ -15,6 +15,10 @@ app.UserView=Backbone.View.extend({
             alert("Can't delete current user!");
             return;
         }
+        if(this.model.attributes.role=="admin") {
+            alert("You can't delete another admin. ");
+            return;
+        }
         this.model.destroy({headers:{'user_id' :getUserId()},
             url: '/api/user/'+id,
             wait: true,
