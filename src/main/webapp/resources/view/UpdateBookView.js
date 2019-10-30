@@ -26,9 +26,8 @@ app.UpdateBookView = Backbone.View.extend({
                 url: "api/books",
                 headers: {'user_id' :getUserId()},
                 success: function (response){
-                debugger;
-                    alert("Book updated successfully.");
                     debugger;
+                    alert("Book updated successfully.");
                     app.DashboardView.prototype.showLibrary();
                 },
                 error: function (model, response) {
@@ -38,8 +37,6 @@ app.UpdateBookView = Backbone.View.extend({
                     alert(response.responseJSON.message);
                 }
             } );
-        var frm=$("#addBookForm")[0];
-        frm.reset();
     },
 
     initialize:function(options){

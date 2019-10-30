@@ -42,6 +42,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookPojo addBook(BookPojo bookPojo){
+        if(bookPojo.getCountBooks()<1){
+            throw new BadRequestException("Count must be greater than 0");
+        }
         Book book=new Book(bookPojo.getTitle(),
                 bookPojo.getAuthor(),
                 bookPojo.getCategory(),
@@ -73,6 +76,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookPojo updateBook(BookPojo bookPojo) {
+        if(bookPojo.getCountBooks()<1){
+            throw new BadRequestException("Count must be greater than 0");
+        }
         Book book=bookDAO.updateBook(bookPojo);
         BookPojo updatedBook=new BookPojo(
                 book.getBook_id(),

@@ -25,6 +25,8 @@ app.AddBookView = Backbone.View.extend({
             {   wait: true,
                 headers: {'user_id' :getUserId()},
                 success: function (response){
+                    var frm=$("#addBookForm")[0];
+                    frm.reset();
                     alert("Book added successfully.")
                 },
                 error: function (model, response) {
@@ -33,8 +35,7 @@ app.AddBookView = Backbone.View.extend({
                     alert(response.responseJSON.message);
                 }
             } );
-        var frm=$("#addBookForm")[0];
-        frm.reset();
+
     },
 
     initialize:function(){
