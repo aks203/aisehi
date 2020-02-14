@@ -15,7 +15,7 @@
 		https://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- Add support for component scanning -->
-	<context:component-scan base-package="com.aks"/>
+	<context:component-scan base-package="com.dpka"/>
 
 	<!-- Add support for conversion, formatting and validation support -->
 	<mvc:annotation-driven/>
@@ -32,7 +32,7 @@
 		  destroy-method="close">
 		<property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
 		<property name="jdbcUrl"
-				  value="jdbc:mysql://localhost:3306/hibernateTutorial?useSSL=false&amp;serverTimezone=UTC"/>
+				  value="jdbc:mysql://localhost:3306/user?useSSL=false&amp;serverTimezone=UTC"/>
 		<property name="user" value="root"/>
 		<property name="password" value="password"/>
 
@@ -46,12 +46,12 @@
 	<bean id="sessionFactory"
 		  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource"/>
-		<property name="packagesToScan" value="com.aks.Entity"/>
+		<property name="packagesToScan" value="com.dpka"/>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<!--<prop key="hibernate.hbm2ddl.auto">create</prop>-->
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
 		</property>
 
@@ -69,13 +69,6 @@
 	 <!--Add support for reading web resources: css, images, js, etc ... -->
 	<mvc:resources location="/resources/" mapping="/resources/**" />
 
-	<!-- Configuring interceptors based on URI -->
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/api/**" />
-			<bean class="com.aks.config.LoginInterceptor" />
-		</mvc:interceptor>
-	</mvc:interceptors>
 </beans>
 
 
