@@ -22,9 +22,9 @@ public class RegistrationController {
             @RequestBody User user
     ) {
         Map<String, Object> userDetails = new HashMap<String, Object>();
-        userDetails.put("user", userService.createUser(user.getId(), user.getUserName(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword()));
+        userDetails.put("user", userService.createUser(user.getId(), user.getFirstname(), user.getLastname(), user.getUsername(), user.getEmail(), user.getPassword()));
         userDetails.put("status", "Success");
-        userDetails.put("msg", "User successfully created. Now, you can login.");
+        userDetails.put("msg", "User successfully created.");
         return userDetails;
     }
 }

@@ -14,17 +14,16 @@ $(document).ready(function () {
         this.$el.empty();
         this.unbind();
     };
-    new app.registrationView({model: new app.User});
-
+    new app.homeView();
 })
 
-// function showDashboard(response) {
-//     app.dashboardView = new app.DashboardView({
-//         model: new app.Dashboard({
-//             response: response
-//         })
-//     });
-// }
+function showUserList(response) {
+    app.UserView = new app.userView({
+        model: new app.UserView({
+            response: response
+        })
+    });
+}
 
 
 

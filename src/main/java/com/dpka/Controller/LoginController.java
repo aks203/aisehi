@@ -15,7 +15,7 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     UserService userService;
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/login", consumes = "application/json")
     public @ResponseBody
     Map<String, Object> login(
             @RequestBody UserPojo user) {

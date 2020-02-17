@@ -2,21 +2,23 @@ var app= app || {};
 app.registrationView = Backbone.View.extend({
    el:"#content",
     events:{
-       'click #register':'register'
+       'click #registerbtn':'register',
+        'click #backbutton1':'backBtn'
     },
-   template:$("#registerPage").html(),
+   template:_.template($("#registerPage").html()),
    initialize:function(){
        this.render();
    },
     register:function(){
        this.model.set({
-           id:$("id").val(),
-           firstname:$("firstname").val(),
-          lastname:$("lastname").val(),
-           username:$("username").val(),
-           email:$("email").val(),
-           password:$("password").val()
+           id:$("#id").val(),
+           firstname:$("#firstname").val(),
+          lastname:$("#lastname").val(),
+           username:$("#username").val(),
+           email:$("#email").val(),
+           password:$("#password").val()
        });
+
        this.model.save({
            type: "POST",
            contentType: "application/json"
@@ -27,19 +29,11 @@ app.registrationView = Backbone.View.extend({
            }
        });
     },
+    backBtn:function(){
+       var v3 = new app.homeView();
+    },
 render:function(){
-       template:_.template(this.template);
-       this.$el.html(this.template(this.model.toJSON()));
+       this.$el.html(this.template());
        return this;
 }
 });
-
-var router = Backbone.Router.extend({
-    routes:{
-        "backbutton":"gotoLogin"
-    },
-    gotoLogin:function(){
-        var v1 = new app.loginView();
-    }
-});
-var prouter = new router();

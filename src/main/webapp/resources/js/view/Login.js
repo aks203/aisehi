@@ -1,42 +1,37 @@
 var app = app || {};
 app.loginView = Backbone.View.extend({
     el:'#content',
-    template:$("#loginPage").html(),
+    template:_.template($("#loginPage").html()),
     events:{
-        'click #login':'login'
+        'click #loginbtn':'login',
+        'click #backbutton':'backBtn'
     },
 initialize:function(){
     this.render();
 },
     login:function(){
         this.model.set({
-            email: $("email").val(),
-            password:$("password").val()
+            email: $("#email").val(),
+            password:$("#password").val()
         });
-        var self = this;
+        // var self = this;
         this.model.save({
             type:"POST",
             contentType:"application/json"
             },{
          success:function(model, response){
          console.log("Login successful");
-         self.$el.empty();
-         console.log(response.msg);
+         // self.$el.empty();
+         showUserList(response);
          }
         });
+        var v4 = new app.userView();
+    },
+    backBtn:function(){
+        var v = new app.homeView();
     },
     render:function(){
-        template:_.template(this.template);
-     this.$el.html(this.template(this.model.toJSON()));
+     this.$el.html(this.template());
      return this;
     }
 });
-// var router = Backbone.Router.extend({
-//    routes:{
-// "back":"gotoRegister"
-//    },
-//     gotoRegister:function(){
-//        var v1 = new app.registrationView();
-//     }
-// });
-// var prouter = new router();

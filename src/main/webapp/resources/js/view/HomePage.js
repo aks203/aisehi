@@ -5,15 +5,19 @@ app.homeView = Backbone.View.extend({
         'click #login':'onLogin',
         'click #register':'onRegister'
     },
-    template:$("#homePage").html(),
+    template:_.template($("#homePage").html()),
       initialize:function(){
         this.render();
     },
-    onLogin:function(){
-       
+    onLogin:function(e){
+        e.preventDefault();
+       var v1 = new app.loginView();
+    },
+    onRegister:function(e){
+        e.preventDefault();
+        var v2 = new app.registrationView({model: new app.User()});
     },
     render:function(){
-        template:_.template(this.template);
         this.$el.html(this.template());
         return this;
     }

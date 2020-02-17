@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
         userPojo.setId(user.getId());
         userPojo.setFirstname(user.getFirstname());
         userPojo.setLastname(user.getLastname());
-        userPojo.setUsername(user.getUserName());
+        userPojo.setUsername(user.getUsername());
         userPojo.setEmail(user.getEmail());
         userPojo.setPassword(user.getPassword());
         return userPojo;
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
             userPojo.setId(user.getId());
             userPojo.setFirstname(user.getFirstname());
             userPojo.setLastname(user.getLastname());
-            userPojo.setUsername(user.getUserName());
+            userPojo.setUsername(user.getUsername());
             userPojo.setEmail(user.getEmail());
             userPojo.setPassword(user.getPassword());
             return userPojo;
